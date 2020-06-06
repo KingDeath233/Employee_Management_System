@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainPageController {
 	@RequestMapping("/")
 	public String index() {
-		return "/external/main";
+		return "redirect:/system/main";
+	}
+	
+	@RequestMapping("/system/main")
+	public String system() {
+		return "/system/main";
 	}
 }
