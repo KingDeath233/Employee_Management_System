@@ -1,6 +1,11 @@
 package com.tyy.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +26,6 @@ public class SystemUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
 		UserDetails user = jdbcUserDetailsManager.loadUserByUsername(username);
 		if(user==null) {
 			throw new UsernameNotFoundException("No user found with username: "+username);
@@ -29,11 +33,13 @@ public class SystemUserDetailsService implements UserDetailsService {
 		return user;
 	}
 	
-	public boolean registerUser(UserDTO newUser) {
+	public boolean registerUser(UserDTO newUser, String type) {
 		if(jdbcUserDetailsManager.userExists(newUser.getUsername())) {
 			return false;
 		}
-		
+		List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		auth.add(new SimpleGrantedAuthority("ROLE_"+type.toUpperCase()));
+		newUser.setAuthorities(auth);
 		String oldpass = newUser.getPassword();
 		newUser.setPassword(encoder.encode(oldpass));
 			jdbcUserDetailsManager.createUser(newUser);

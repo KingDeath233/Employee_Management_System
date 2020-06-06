@@ -8,7 +8,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.tyy.services.validators.PasswordMatching;
@@ -26,18 +25,16 @@ public class UserDTO implements UserDetails{
 	private static final long serialVersionUID = 1L;
 	@NotEmpty(message="Username cannot be empty!")
 	private String username;
-	@NotEmpty(message="Password cannot be empty!")
 	@Length(min=5, message="Password should be more than 5 digits!")
 	private String password;
-	@NotEmpty(message="Matching password cannot be empty!")
 	private String matchingPassword;
+	@Length(min=8,max=8,message="Serial code should be exactly 8 digits!")
+	private String code;
 	
 	private List<GrantedAuthority> authorities = new ArrayList<>();
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		authorities.add(new SimpleGrantedAuthority("ROLE_"+"EMPLOYEE"));
 		return this.authorities;
 	}
 

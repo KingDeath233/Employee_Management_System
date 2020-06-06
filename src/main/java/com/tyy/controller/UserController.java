@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tyy.entities.UserDTO;
+import com.tyy.services.SerialCodeService;
 import com.tyy.services.SystemUserDetailsService;
 
 
@@ -20,6 +21,8 @@ import com.tyy.services.SystemUserDetailsService;
 public class UserController {
 	@Autowired 
 	SystemUserDetailsService userService;
+	@Autowired
+	SerialCodeService serialCodeService;
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -37,7 +40,11 @@ public class UserController {
 		if(result.hasErrors()){
 			return "/register";
 		}
-		else if(!userService.registerUser(newUser)) {
+		String type = serialCodeService.ifCodeExist(newUser.getCode());
+		if(type.equals("")) {
+			return "redirect:/register?codeNotExists";
+		}
+		else if(!userService.registerUser(newUser,type)) {
 			return "redirect:/register?userExists";
 		}
 		return "redirect:/login?signedup";

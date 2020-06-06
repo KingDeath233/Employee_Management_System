@@ -20,15 +20,15 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	@Qualifier("securityDataSource")
-	private DataSource securityDataSource;
+	@Qualifier("springDataSource")
+	private DataSource springDataSource;
 	
 	@Autowired
 	private UserDetailsService userService;
 	
 	@Bean
 	public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception{
-		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(securityDataSource);
+		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(springDataSource);
 		return jdbcUserDetailsManager;
 	}
 	
@@ -42,16 +42,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		
 		auth
 			.userDetailsService(userService)
 			.passwordEncoder(this.passCodeEncoder())
 			.and()
 			.jdbcAuthentication()
-			.dataSource(securityDataSource)
+			.dataSource(springDataSource)
 			.passwordEncoder(this.passCodeEncoder());
-
 	}
 
 
