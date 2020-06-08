@@ -3,7 +3,7 @@ package com.tyy.services.validators;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.tyy.entities.UserDTO;
+import com.tyy.dto.UserDTO;
 
 public class PasswordMatchingValidator implements ConstraintValidator<PasswordMatching, UserDTO> {
 

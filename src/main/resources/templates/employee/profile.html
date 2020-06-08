@@ -76,6 +76,10 @@
             left:10%;
             position:absolute;
         }
+        .error{
+            color:snow;
+            margin-bottom: 10px;
+        }
     </style>
 
 </head>
@@ -92,7 +96,7 @@
         </div>
         <div id="profile">
             <form th:action="@{/employee/profile}" method="POST">
-                <input type="submit" value="Profile" class="btn btn-info mt-2" />
+                <input type="submit" value="Profile" class="btn btn-info mt-2">
             </form>
         </div>
         <div id="welcome_message">
@@ -107,7 +111,19 @@
         </table>
     </div>
     <div id="content">
-
+		<form th:action="@{/employee/profile/save}" th:object="${employee}" method="POST">
+			<input class="form-control" type="hidden" th:field="*{id}">
+			<input class="form-control" type="text" readonly="readonly" th:field="*{last_name}">
+			<input class="form-control" type="text" readonly="readonly" th:field="*{first_name}">
+			<input class="form-control" type="text" th:field="*{phone}" placeholder="Phone">
+			<div class="error" th:if="*{#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+			<input class="form-control" type="text" th:field="*{email}" placeholder="Email">
+			<div class="error" th:if="*{#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			<input class="form-control" type="text" readonly="readonly" th:field="*{username}">
+			<input type="submit" value="Update" class="btn btn-info mt-2">
+			<button style="margin-left: 10px;width:80px;" type="button" class="btn btn-secondary mt-2"
+            th:onclick="window.location.href='/'">Return</button>
+		</form>
     </div>
 </body>
 

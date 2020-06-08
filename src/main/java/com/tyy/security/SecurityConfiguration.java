@@ -32,13 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return jdbcUserDetailsManager;
 	}
 	
-	
 	@Bean
 	public BCryptPasswordEncoder passCodeEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -47,24 +44,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.passwordEncoder(this.passCodeEncoder())
 			.and()
 			.jdbcAuthentication()
-			.dataSource(springDataSource)
-			.passwordEncoder(this.passCodeEncoder());
+			.dataSource(springDataSource);
 	}
-
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
 		http.authorizeRequests()
-		.antMatchers("/system/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
-		.and()
+			.antMatchers("/login","/register","/process-register").permitAll()
+			.anyRequest().authenticated()
+			.and()
 		.formLogin()
 			.loginPage("/login")
+            .usernameParameter("username")
+            .passwordParameter("password")
 			.loginProcessingUrl("/authenticateTheUser")
-			.permitAll()
-		.and()
-		.logout().permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/access-denied");
+			.and()
+		.logout()
+			.logoutSuccessUrl("/login?logout")
+			.and()
+		.exceptionHandling()
+			.accessDeniedPage("/access-denied")
+			.and()
+        .httpBasic()
+        	.disable();
 	}
 }

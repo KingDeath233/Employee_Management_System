@@ -1,4 +1,4 @@
-package com.tyy.entities;
+package com.tyy.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,7 +42,6 @@ public class UserDTO implements UserDetails{
 		this.authorities = authorities;
 	}
 
-
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -62,6 +61,4 @@ public class UserDTO implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-
-	
 }

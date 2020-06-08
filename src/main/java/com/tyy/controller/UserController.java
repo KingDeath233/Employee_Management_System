@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tyy.entities.UserDTO;
+import com.tyy.dto.UserDTO;
 import com.tyy.services.SerialCodeService;
 import com.tyy.services.SystemUserDetailsService;
 

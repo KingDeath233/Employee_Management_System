@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
-import com.tyy.entities.UserDTO;
+import com.tyy.dto.UserDTO;
 
 @Service
 public class SystemUserDetailsService implements UserDetailsService {
@@ -45,6 +45,5 @@ public class SystemUserDetailsService implements UserDetailsService {
 			jdbcUserDetailsManager.createUser(newUser);
 		return true;
 	}
-
 }
 
