@@ -156,14 +156,14 @@ body{
 */
 .content{
     position: absolute;
-  top: 0;
-  right: 0;
-  -webkit-transition: width 0.3s linear;
-  transition: width 0.3s linear;
-  width: calc(100% - 200px);
-  background-color: #F4F7FA;
-  min-height: 100vh;
-  padding-bottom: 50px;
+    top: 0;
+    right: 0;
+    -webkit-transition: width 0.3s linear;
+    transition: width 0.3s linear;
+    width: calc(100% - 200px);
+    background-color: #F4F7FA;
+    min-height: 100vh;
+    padding-bottom: 50px;
 }
 
 .page.active {
@@ -326,5 +326,9 @@ body{
     bottom: 0;
     position: absolute;
     width: 100%;
+}
+
+#main-footer p,h6,span{
+  color:wheat;
 }
 

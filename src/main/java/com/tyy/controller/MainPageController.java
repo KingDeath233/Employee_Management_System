@@ -12,6 +12,6 @@ public class MainPageController{
 	
 	@RequestMapping("/system/main")
 	public String system() {
-		return "/system/main";
+		return "/system/template";
 	}
 }
