@@ -26,12 +26,12 @@ public class Employee {
 	private int id;
 	
 	@Pattern(regexp = "\\D+", message="Not a valid name!")
-	@Column(name="first_name")
-	private String first_name;
+	@Column(name="firstname")
+	private String firstname;
 	
 	@Pattern(regexp = "\\D+", message="Not a valid name!")
-	@Column(name="last_name")
-	private String last_name;
+	@Column(name="lastname")
+	private String lastname;
 	
 	@Email(message="Not an valid email!")
 	@Column(name="email")
@@ -43,4 +43,7 @@ public class Employee {
 	
 	@Column(name="username")
 	private String username;
+	
+	@Column(name="ismanager")
+	private int ismanager;
 }

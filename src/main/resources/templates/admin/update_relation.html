@@ -110,22 +110,26 @@
         </table>
     </div>
     <div id="content">
-		<form th:action="@{/employee/profile/save}" th:object="${employee}" method="POST">
-            <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{ismanager}">
-			<input class="form-control" type="text" readonly="readonly" th:field="*{lastname}">
-			<input class="form-control" type="text" readonly="readonly" th:field="*{firstname}">
-			<input class="form-control" type="text" th:field="*{phone}" placeholder="Phone">
-			<div class="error" th:if="*{#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
-			<input class="form-control" type="text" th:field="*{email}" placeholder="Email">
-			<div class="error" th:if="*{#fields.hasErrors('email')}" th:errors="*{email}"></div>
-			<input class="form-control" type="text" readonly="readonly" th:field="*{username}">
-			<input type="submit" value="Update" class="btn btn-info mt-2">
-			<button style="margin-left: 10px;width:80px;" type="button" class="btn btn-secondary mt-2"
-            th:onclick="window.location.href='/'">Return</button>
-		</form>
+		    <form th:action="@{/admin/process-update_relation}" th:object="${relation}" method="POST">
+			<!-- hidden form field to handle update (ones with existing id number) -->
+			<input type="hidden" th:field="*{id}">
+			<div>
+            <select class="custom-select" style="width:500px;margin-bottom: 30px;" th:field="*{manager_id}">
+            <option style="min-width:500px;" th:each="tempManager : ${managers}"
+            th:value="${tempManager.id}"
+            th:text="${tempManager.lastname+' '+tempManager.firstname}"></option>
+            </select>
+            </div>
+            <div>
+            <select class="custom-select" style="width:500px;margin-bottom: 30px;" th:field="*{employee_id}">
+            <option style="min-width:500px;" th:each="tempEmployee : ${employees}"
+            th:value="${tempEmployee.id}"
+            th:text="${tempEmployee.lastname+' '+tempEmployee.firstname}"></option>
+            </select>
+            </div>
+            <button class="btn btn-info col-2" type="submit">Save</button>
+        </form>
     </div>
 </body>
 
 </html>
-

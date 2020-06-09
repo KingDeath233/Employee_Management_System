@@ -18,7 +18,7 @@ import com.tyy.services.SystemUserDetailsService;
 
 @Controller
 
-public class UserController {
+public class UserController{
 	@Autowired 
 	SystemUserDetailsService userService;
 	@Autowired

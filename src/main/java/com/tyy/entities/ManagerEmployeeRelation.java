@@ -11,11 +11,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="employee")
+@Table(name="manager_employee_relation")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Manager_Employee_Relation {
+public class ManagerEmployeeRelation {
 	@Id
 	private int id;
 	

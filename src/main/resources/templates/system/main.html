@@ -76,6 +76,9 @@
             left:10%;
             position:absolute;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -101,7 +104,7 @@
     </div>
     <div id="menu">
         <table border="1">
-            <tr sec:authorize="hasAnyRole('ADMIN')"><td>admin function</td></tr>
+            <tr sec:authorize="hasAnyRole('ADMIN')"><td><a th:href="@{/admin/show_relation}">admin function</a></td></tr>
             <tr sec:authorize="hasAnyRole('ADMIN','MANAGER')"><td>manager function</td></tr>
             <tr sec:authorize="hasAnyRole('ADMIN','MANAGER','EMPLOYEE')"><td>employee function</td></tr>
         </table>

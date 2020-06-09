@@ -104,28 +104,34 @@
     </div>
     <div id="menu">
         <table border="1">
-            <tr sec:authorize="hasAnyRole('ADMIN')"><td><a th:href="@{/admin/show_relation}">admin function</a></td></tr>
+            <tr sec:authorize="hasAnyRole('ADMIN')"><td><a th:href="@{/admin/update_relation}">admin function</a></td></tr>
             <tr sec:authorize="hasAnyRole('ADMIN','MANAGER')"><td>manager function</td></tr>
             <tr sec:authorize="hasAnyRole('ADMIN','MANAGER','EMPLOYEE')"><td>employee function</td></tr>
         </table>
     </div>
     <div id="content">
-		<form th:action="@{/employee/profile/save}" th:object="${employee}" method="POST">
-            <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{ismanager}">
-			<input class="form-control" type="text" readonly="readonly" th:field="*{lastname}">
-			<input class="form-control" type="text" readonly="readonly" th:field="*{firstname}">
-			<input class="form-control" type="text" th:field="*{phone}" placeholder="Phone">
-			<div class="error" th:if="*{#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
-			<input class="form-control" type="text" th:field="*{email}" placeholder="Email">
-			<div class="error" th:if="*{#fields.hasErrors('email')}" th:errors="*{email}"></div>
-			<input class="form-control" type="text" readonly="readonly" th:field="*{username}">
-			<input type="submit" value="Update" class="btn btn-info mt-2">
-			<button style="margin-left: 10px;width:80px;" type="button" class="btn btn-secondary mt-2"
-            th:onclick="window.location.href='/'">Return</button>
-		</form>
+        <table class="table table-bordered table-striped">
+            <thead class ="thead-dark">
+                <tr>
+					<th>Manager Name</th>
+					<th>Employee Name</th>
+                    <th>Function</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- th:each loops over each member of ${employees} list
+            tempEmployee is a randomly declared variable used in this html page only, employees is the model attribute made in the EmployeeController -->
+                <tr th:each=" temp: ${relations}">
+                    <td th:text="${temp.manager_last_name } + ' ' + ${temp.manager_first_name}"></td>
+                    <td th:text="${temp.employee_last_name } + ' ' + ${temp.employee_first_name}"></td>
+                    <td><a th:href="@{/admin/update_relation(id = ${temp.id})}"
+                    class="btn btn-info btn-sm">Update</a>
+                    <a th:href="@{/admin/delete_relation(id = ${temp.id})}"
+                    class="btn btn-info btn-sm">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 
 </html>
-
