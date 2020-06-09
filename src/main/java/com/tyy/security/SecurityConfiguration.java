@@ -63,6 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.loginProcessingUrl("/authenticateTheUser")
 			.and()
 		.logout()
+			.logoutUrl("/logout")
 			.logoutSuccessUrl("/login?logout")
 			.and()
 		.exceptionHandling()
