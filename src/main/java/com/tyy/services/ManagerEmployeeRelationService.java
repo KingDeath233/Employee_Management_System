@@ -9,6 +9,7 @@ import com.tyy.dao.ManagerEmployeeRelationDAO;
 import com.tyy.dto.ManagerEmployeeRelationDTO;
 import com.tyy.entities.ManagerEmployeeRelation;
 
+
 @Service
 public class ManagerEmployeeRelationService {
 	
@@ -29,4 +30,9 @@ public class ManagerEmployeeRelationService {
 	public ManagerEmployeeRelation findById(int id) {
 		return repo.getOne(id);
 	}
+	
+	public List<ManagerEmployeeRelation> findAll(){
+		return repo.findAll();
+	}
+	
 }

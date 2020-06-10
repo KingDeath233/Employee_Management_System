@@ -12,8 +12,9 @@ public interface ManagerEmployeeRelationDAO extends JpaRepository<ManagerEmploye
 
 	@Query("select new com.tyy.dto.ManagerEmployeeRelationDTO(r.id,m.id,m.lastname,m.firstname,e.id,e.lastname,e.firstname) \r\n" + 
 			"from Employee e, Employee m, ManagerEmployeeRelation r \r\n" + 
-			"where e.id = r.employee_id and m.id = r.manager_id \r\n" + 
+			"where e.id = r.employeeid and m.id = r.managerid \r\n" + 
 			"order by m.id,e.id")
 	public List<ManagerEmployeeRelationDTO> findAllFromManagerEmployeeRelation();
 
+	public List<ManagerEmployeeRelation> findAll();
 }

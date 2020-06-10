@@ -18,24 +18,32 @@
     <div th:replace="template :: template">
     </div>
     <div id="content">
-		    <form th:action="@{/admin/process-update_relation}" th:object="${relation}" method="POST">
+		    <form th:action="@{/admin/process-add_relation}" th:object="${relation}" method="POST">
 			<!-- hidden form field to handle update (ones with existing id number) -->
 			<input type="hidden" th:field="*{id}">
 			<div>
-            <select class="custom-select" style="width:500px;margin-bottom: 30px;" th:field="*{manager_id}">
+            <select class="custom-select" style="width:500px;margin-bottom: 30px;" th:field="*{managerid}">
             <option style="min-width:500px;" th:each="tempManager : ${managers}"
             th:value="${tempManager.id}"
             th:text="${tempManager.lastname+' '+tempManager.firstname}"></option>
             </select>
             </div>
             <div>
-            <select class="custom-select" style="width:500px;margin-bottom: 30px;" th:field="*{employee_id}">
+            <select class="custom-select" style="width:500px;margin-bottom: 30px;" th:field="*{employeeid}">
             <option style="min-width:500px;" th:each="tempEmployee : ${employees}"
             th:value="${tempEmployee.id}"
             th:text="${tempEmployee.lastname+' '+tempEmployee.firstname}"></option>
             </select>
             </div>
-            <button class="btn btn-info col-2" type="submit">Save</button>
+            <div class="error" th:if="*{#fields.hasErrors('global')}">
+                <span th:errors="*{global}"></span><br>
+                <button class="btn btn-info col-2" type="button" onclick="javascript:history.go(-1);">Back</button>
+                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/'">Return</button>
+            </div>
+            <div th:if="!*{#fields.hasErrors('global')}">
+                <button class="btn btn-info col-2" type="submit">Add</button>
+                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/'">Return</button>
+            </div>
         </form>
     </div>
 </body>

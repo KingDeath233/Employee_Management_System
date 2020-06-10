@@ -31,9 +31,9 @@
                 <tr th:each=" temp: ${relations}">
                     <td th:text="${temp.manager_last_name } + ' ' + ${temp.manager_first_name}"></td>
                     <td th:text="${temp.employee_last_name } + ' ' + ${temp.employee_first_name}"></td>
-                    <td><a th:href="@{/admin/update_relation(id = ${temp.id})}"
-                    class="btn btn-info btn-sm">Update</a>
-                    <a th:href="@{/admin/delete_relation(id = ${temp.id})}"
+                    <td><a th:href="@{/admin/add_relation}"
+                    class="btn btn-info btn-sm">Add</a>
+                        <a th:href="@{/admin/delete_relation(id = ${temp.id})}"
                     class="btn btn-info btn-sm">Delete</a></td>
                 </tr>
             </tbody>
