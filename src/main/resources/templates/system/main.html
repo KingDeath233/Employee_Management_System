@@ -4,110 +4,18 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>Employee Management System</title>
     
-    <style>
-        #header{
-            width:100%;
-            background-color: black;
-            height:80px;
-        }
-        #title{
-            margin-left: 10px;
-            width:500px;
-            height:80px;
-            line-height: 70px;
-            float:left;
-        }
-        #title p{
-            font-size: 25px;
-            color:aliceblue;
-            text-align: center;
-        }
-        #welcome_message{
-            margin-right: 50px;
-            text-align: center;
-            float:right;
-            width:200px;
-            height:80px;
-            line-height: 70px;
-        }
-        #welcome_message p,span{
-            color:aliceblue;
-            text-align: center;
-        }
-        #profile{
-            margin-right: 30px;
-            width:70px;
-            height:80px;
-            margin-top:10px;
-            float:right;
-        }
-        #logout{
-            margin-right: 30px;
-            width:70px;
-            height:80px;
-            margin-top:10px;
-            float:right;
-        }
-        #menu{
-            width:10%;
-            background-color: gray;
-            height:calc(100% - 80px);
-        }
-        #menu td{
-            width:10%;
-            text-align: center;
-            height: 40px;
-            color:bisque;
-            border: 2px solid silver;
-            border-collapse: collapse;
-        }
-        #content{
-            width:90%;
-            background-color: brown;
-            height:calc(100% - 80px);
-            top:80px;
-            left:10%;
-            position:absolute;
-        }
-        a{
-            text-decoration: none;
-        }
-    </style>
 
 </head>
 
 <body>
-    <div id="header">
-        <div id="title">
-            <p>Employee Management System &nbsp; V1.0</p>
-        </div>
-        <div id="logout">
-            <form th:action="@{/logout}" method="POST">
-                <input type="submit" value="Logout" class="btn btn-info mt-2" />
-            </form>
-        </div>
-        <div id="profile">
-            <form th:action="@{/employee/profile}" method="POST">
-                <input type="submit" value="Profile" class="btn btn-info mt-2" />
-            </form>
-        </div>
-        <div id="welcome_message">
-            <span>Welcome <span sec:authentication="name"></span></span>&nbsp;&nbsp;
-        </div>
-    </div>
-    <div id="menu">
-        <table border="1">
-            <tr sec:authorize="hasAnyRole('ADMIN')"><td><a th:href="@{/admin/show_relation}">admin function</a></td></tr>
-            <tr sec:authorize="hasAnyRole('ADMIN','MANAGER')"><td>manager function</td></tr>
-            <tr sec:authorize="hasAnyRole('ADMIN','MANAGER','EMPLOYEE')"><td>employee function</td></tr>
-        </table>
+    <div th:replace="template :: template">
     </div>
     <div id="content">
 

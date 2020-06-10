@@ -152,7 +152,7 @@ body{
 }
 
 /* 
-    Content
+    Group
 */
 .content{
     position: absolute;
@@ -332,3 +332,18 @@ body{
   color:wheat;
 }
 
+/*
+    Content
+*/
+
+#content{
+    width:90%;
+    background-color: brown;
+    height:calc(100% - 80px);
+    top:40px;
+    left:200px;
+    position:absolute;
+}
+#content a{
+    text-decoration: none;
+}
