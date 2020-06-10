@@ -92,6 +92,10 @@ body{
   margin-bottom: 10px;
 }
 
+.sidenav-menu ul li a{
+  display: block;
+}
+
 .side-navbar li{
     position: relative;
 }
@@ -198,7 +202,7 @@ body{
 }
 
 .side-navbar.shrink ul li a {
-  font-size: .5rem;
+  font-size: .7rem;
   padding-left: 5px;
   padding-right: 5px;
 }
