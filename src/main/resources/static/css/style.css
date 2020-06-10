@@ -1,3 +1,4 @@
+  
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 body{
@@ -27,6 +28,28 @@ body{
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border-right:slateblue 2px solid;
+}
+
+.side-navbar .hide{
+  left: -70px;
+}
+
+.side-navbar a.brand-small {
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0;
+}
+
+.side-navbar a.brand-small:hover, .side-navbar a.brand-small:focus {
+  background: none;
+}
+
+.side-navbar a.brand-small strong {
+  font-size: 1.5rem;
+}
+
+.side-navbar li {
+  position: relative;
 }
 
 .side-navbar .scrolled-wrapper {
@@ -139,6 +162,58 @@ body{
     margin-bottom: 5px;
 }
 
+/* When side navbar shrinks */
+.side-navbar.shrink{
+  width: 70px;
+  text-align: center;
+}
+
+.side-navbar.shrink i {
+  display: block;
+  margin-right: 0;
+  font-size: 1rem;
+}
+
+.side-navbar.shrink .arrow {
+  float: none;
+  -webkit-transform: none !important;
+  transform: none !important;
+}
+
+.side-navbar.shrink .badge {
+  display: none;
+}
+
+.side-navbar.shrink .brand-small {
+  display: block;
+}
+
+.side-navbar.shrink .sidenav-header-inner {
+  display: none;
+}
+
+.side-navbar.shrink .sidenav-heading {
+  margin-left: 0;
+  font-size: .8rem;
+}
+
+.side-navbar.shrink ul li a {
+  font-size: .5rem;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.side-navbar.shrink ul li a[data-toggle="collapse"]::before {
+  content: '\f107';
+  -webkit-transform: translateX(50%);
+  transform: translateX(50%);
+  position: absolute;
+  top: auto;
+  right: 50%;
+  bottom: 0;
+  left: auto;
+}
+
 
 #nav-log{
     border-bottom: white 1px solid;
@@ -166,9 +241,11 @@ body{
     padding-bottom: 50px;
 }
 
-.page.active {
+.content.active {
     width: calc(100% - 70px);
   }
+
+
 
 
 /*
@@ -344,6 +421,100 @@ body{
 }
 #content a{
     text-decoration: none;
+}
+
+/* 
+  Responsive
+*/
+@media (max-width: 1199px){
+  .content{
+    width: 100%;
+  }
+
+  .content.active-sm{
+    width: calc(100% - 70px);
+  }
+
+  .side-navbar{
+    left:-70px;
+    width: 70px;
+    text-align: center;
+  }
+
+  .side-navbar.show-sm{
+    left: 0 !important;
+  }
+
+  .side-navbar .brand-small{
+    display: block;
+  }
+
+  .side-narbar .sidenav-header-inner{
+    display:none;
+  }
+
+  .side-navbar .sidenav-heading{
+    margin-left: 0;
+    font-size: .8rem;
+  }
+
+  /* Function category links on sidebar */
+  .side-navbar ul li a{
+    font-size: .7rem;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .side-navbar ul li a[data-toggle="collapse"]::before {
+    content: '\f107';
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+    position: absolute;
+    top: auto;
+    right: 50%;
+    bottom: 0;
+    left: auto;
+  }
+
+  .side-navbar ul li a[data-toggle="collapse"][aria-expanded="true"]::before {
+    content: '\f106';
+  }
+
+  /* Page links in sidenav */
+  .side-navbar ul li ul a {
+    padding-left: 10px;
+    font-size: .7rem;
+  }
+
+  .side-navbar i {
+    display: block;
+    margin-right: 0;
+    font-size: 1rem;
+  }
+
+  .side-navbar .arrow {
+    float: none;
+    -webkit-transform: none !important;
+    transform: none !important;
+  }
+  .side-navbar .badge {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 992px) {
+  nav.navbar .dropdown-menu strong {
+    font-weight: 400;
+  }
+  nav.navbar .dropdown-menu a {
+    font-size: 0.9em;
+  }
 }
 
 .error{
