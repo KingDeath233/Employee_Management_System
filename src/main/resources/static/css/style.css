@@ -26,7 +26,7 @@ body{
   overflow-y: auto;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border-right: honeydew 2px solid;
+  border-right:slateblue 2px solid;
 }
 
 .side-navbar .scrolled-wrapper {
@@ -177,6 +177,7 @@ body{
  nav.navbar {
     background: #393836;
     padding: .8rem 0;
+    border-bottom: slateblue 2px solid;
     /* Navbar Brand --------- */
     /*  Dropdowns ------------ */
     /* Toggle Button ---------- */
@@ -322,7 +323,7 @@ body{
 */
 
 #main-footer{
-    border-top: slateblue 3px solid;
+    border-top: slateblue 2px solid;
     bottom: 0;
     position: absolute;
     width: 100%;
@@ -339,8 +340,8 @@ body{
 #content{
     width:90%;
     background-color: brown;
-    height:calc(100% - 80px);
-    top:40px;
+    height:calc(100% - 90px);
+    top:48px;
     left:200px;
     position:absolute;
 }
