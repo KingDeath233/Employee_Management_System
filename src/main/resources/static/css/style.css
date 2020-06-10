@@ -327,10 +327,8 @@ body{
     bottom: 0;
     position: absolute;
     width: 100%;
-}
-
-#main-footer p,h6,span{
-  color:wheat;
+    font-weight:bold;
+    color:wheat;
 }
 
 /*
@@ -339,7 +337,6 @@ body{
 
 #content{
     width:90%;
-    background-color: brown;
     height:calc(100% - 90px);
     top:48px;
     left:200px;
