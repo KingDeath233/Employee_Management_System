@@ -41,10 +41,10 @@
                 <!-- List of functions -->
                 <ul id="side-main-menu" class="side-menu list-unstyled">
                     <li>
-                        <a href="/"><i class="fa fa-home">Home</i></a>
+                        <a href="/"><i class="fa fa-home"></i>Home</a>
                     </li>
                     <li>
-                        <a href="#scheduleDropdown" data-toggle="collapse"><i class="fa fa-calendar">Schedule</i></a>
+                        <a href="#scheduleDropdown" data-toggle="collapse"><i class="fa fa-calendar"></i>Schedule</a>
                         <ul id="scheduleDropdown" class="collapse list-unstyled">
                             <li><a href="#">My Schedule</a></li>
                             <li><a href="#">All Employee Schedule</a></li>
@@ -52,7 +52,7 @@
                     </li>
                     <li>
                         <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/show_relation}"><i
-                                class="fa fa-home">Manage Relation</i></a>
+                                class="fa fa-home"></i>Manage Relation</a>
                     </li>
                 </ul>
             </div>
