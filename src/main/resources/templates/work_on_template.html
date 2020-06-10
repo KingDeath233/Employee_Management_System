@@ -1,5 +1,28 @@
-<div th:fragment="template">
-    <!-- Side Navbar -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- local style.css -->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<!-- Side Navbar -->
+
+<body>
+
+
     <nav class="side-navbar">
         <div class="side-navbar-wrapper">
             <!-- Sidebar Wrapper -->
@@ -44,7 +67,8 @@
                 <div class="container-fluid">
                     <div class="navbar-holder d-flex align-items-center justify-content-between">
                         <div class="navbar-header">
-                            <a id="toggle-btn" href="#" class="menu-btn"><i class="fa fa-amazon"></i></a>
+                            <a id="toggle-btn" data-toggle="collapse" href="#" class="menu-btn"><i
+                                    class="fa fa-amazon"></i></a>
                             <a href="index.html" class="navbar-brand">
                                 <div class="brand-text d-none d-md-inline-block"><span>Employee </span>
                                     <strong class="text-primary">Management</strong></div>
@@ -77,10 +101,12 @@
                 <div class="container-fluid">
                     <div class="row py-2">
                         <div class="col-sm-6 text-left">
-                            <span>
-                                <span class="d-inline pl-3">Employee Management &emsp;</span>
-                                Copyright &copy; <span id="year"></span> TYY
-                            </span>
+                            <div class="row">
+                                <div class="col-sm-6"><span>Employee Management &emsp;</span>
+                                </div>
+                                <div class="col-sm-6"> Copyright &copy; <span id="year"></span> TYY
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6 text-right">
                             <p class="d-inline">Version 0.0.1</p>
@@ -104,4 +130,11 @@
         // Get the current year for the copyright
         $('#year').text(new Date().getFullYear());
     </script>
-</div>
+
+    <!-- Template js -->
+    <script src="../static/js/template-js.js"></script>
+
+
+</body>
+
+</html>
