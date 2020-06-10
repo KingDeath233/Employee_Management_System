@@ -18,7 +18,7 @@
             <!-- List of functions -->
             <ul id="side-main-menu" class="side-menu list-unstyled">
                 <li>
-                    <a href="#"><i class="fa fa-home">Home</i></a>
+                    <a href="/"><i class="fa fa-home">Home</i></a>
                 </li>
                 <li>
                     <a href="#scheduleDropdown" data-toggle="collapse"><i class="fa fa-calendar">Schedule</i></a>
@@ -28,7 +28,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a th:href="@{/admin/show_relation}"><i class="fa fa-home">Manage Relation</i></a>
+                    <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/show_relation}"><i class="fa fa-home">Manage Relation</i></a>
                 </li>
             </ul>
         </div>
