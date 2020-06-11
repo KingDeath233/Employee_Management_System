@@ -1,5 +1,7 @@
 package com.tyy.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tyy.entities.Employee;
+import com.tyy.entities.Schedule;
 import com.tyy.services.EmployeeService;
 import com.tyy.services.ScheduleService;
 import com.tyy.services.SystemUserDetailsService;
 
-@RequestMapping("/employee")
 @Controller
 public class EmployeeController{
 	
@@ -27,7 +29,7 @@ public class EmployeeController{
 	@Autowired
 	ScheduleService scheduleService;
 	
-	@GetMapping("/profile")
+	@GetMapping("/employee/profile")
 	public String eProfile(Model theModel) {
 		String username = userService.getUsername();
 		Employee e = employeeService.findByUsername(username);
@@ -35,7 +37,7 @@ public class EmployeeController{
 		return "/employee/profile";
 	}
 	
-	@PostMapping("/profile/save")
+	@PostMapping("/employee/profile/save")
 	public String saveProfile(@Valid @ModelAttribute("employee") Employee employee,BindingResult result,Model theModel) {
 		if(result.hasErrors()){
 			return "/employee/profile";
@@ -46,9 +48,8 @@ public class EmployeeController{
 		}
 	}
 	
-	@GetMapping("/my_schedule")
+	@GetMapping("/employee/my_schedule")
 	public String viewMySchedule() {
-		System.out.println(scheduleService.findAllByEmployeeId(3));
 		return "/employee/my_schedule";
 	}
 }

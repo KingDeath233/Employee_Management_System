@@ -1,5 +1,7 @@
 package com.tyy.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,11 +31,11 @@ public class Schedule {
 	
 	@NotEmpty
 	@Column(name="startTime")
-	private String startTime;
+	private Date startTime;
 	
 	@NotEmpty
 	@Column(name="endTime")
-	private String endTime;
+	private Date endTime;
 	
 	@NotEmpty
 	@Column(name="jobDes")

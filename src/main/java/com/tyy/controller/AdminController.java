@@ -9,14 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tyy.entities.ManagerEmployeeRelation;
 import com.tyy.services.EmployeeService;
 import com.tyy.services.ManagerEmployeeRelationService;
 
-@RequestMapping("admin")
 @Controller
 public class AdminController {
 	
@@ -25,19 +23,19 @@ public class AdminController {
 	@Autowired
 	EmployeeService employeeService;
 	
-	@GetMapping("/show_relation")
+	@GetMapping("/admin/show_relation")
 	public String showRelation(Model theModel) {
 		theModel.addAttribute("relations",MERService.findAllFromManagerEmployeeRelation());
 		return "/admin/show_relation";
 	}
 
-	@GetMapping("/delete_relation")
+	@GetMapping("/admin/delete_relation")
 	public String deleteRelation(@RequestParam("id") int id) {
 		MERService.deleteById(id);
 		return "redirect:/admin/show_relation";
 	}
 	
-	@GetMapping("/add_relation")
+	@GetMapping("/admin/add_relation")
 	public String addRelation(Model theModel){
 		ManagerEmployeeRelation relation = new ManagerEmployeeRelation();
 		theModel.addAttribute("relation",relation);	

@@ -38,11 +38,11 @@
             <div class="error" th:if="*{#fields.hasErrors('global')}">
                 <span th:errors="*{global}"></span><br>
                 <button class="btn btn-info col-2" type="button" onclick="javascript:history.go(-1);">Back</button>
-                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/'">Return</button>
+                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/admin/show_relation'">Return</button>
             </div>
             <div th:if="!*{#fields.hasErrors('global')}">
                 <button class="btn btn-info col-2" type="submit">Add</button>
-                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/'">Return</button>
+                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/admin/show_relation'">Return</button>
             </div>
         </form>
     </div>
