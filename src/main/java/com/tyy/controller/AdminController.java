@@ -1,5 +1,7 @@
 package com.tyy.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tyy.entities.Employee;
 import com.tyy.entities.ManagerEmployeeRelation;
+import com.tyy.services.AdminService;
 import com.tyy.services.EmployeeService;
 import com.tyy.services.ManagerEmployeeRelationService;
 
@@ -22,6 +26,8 @@ public class AdminController {
 	ManagerEmployeeRelationService MERService;
 	@Autowired
 	EmployeeService employeeService;
+	@Autowired
+	AdminService adminService;
 	
 	@GetMapping("/admin/show_relation")
 	public String showRelation(Model theModel) {
@@ -53,5 +59,59 @@ public class AdminController {
 			MERService.save(relation);
 			return "redirect:/admin/show_relation";
 		}
+	}
+	
+	@GetMapping("/manager/show_employee_list")
+	public String showEmployeeList(Model theModel) {
+		List<Employee> m = employeeService.findAllManager();
+		List<Employee> e = employeeService.findAllEmployee();
+		m.addAll(e);
+		theModel.addAttribute("stuff", m);
+		return "/manager/show_employee_list";
+	}
+	
+	@GetMapping("/admin/add_employee")
+	public String addEmployee(Model theModel) {
+		Employee e = new Employee();
+		List<String> usernames = adminService.findAllUsername();
+		theModel.addAttribute("newEmployee", e);
+		theModel.addAttribute("avaiable_list",usernames);
+		return "/admin/add_employee";
+	}
+	
+	@PostMapping("/admin/process-add_employee")
+	public String processAddEmployee(@Valid @ModelAttribute("newEmployee") Employee e,BindingResult result,Model theModel) {
+		if(result.hasErrors()) {
+			return "/admin/add_employee";
+		}
+		else {
+			employeeService.save(e);
+			return "redirect:/manager/show_employee_list";
+		}
+	}
+	
+	@GetMapping("/admin/update_employee")
+	public String updateEmployee(@RequestParam("id") int id, Model theModel) {
+		Employee e = employeeService.findEmployee(id);
+		theModel.addAttribute("newEmployee", e);
+		List<String> usernames = adminService.findAllUsername();
+		usernames.add(e.getUsername());
+		theModel.addAttribute("avaiable_list",usernames);
+		return "admin/add_employee";
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "table-example";
+	}
+	
+	@GetMapping("/admin/delete_employee")
+	public String deleteEmployee(@RequestParam("id") int id) {
+		List<ManagerEmployeeRelation> relations = MERService.findAllByEmployeeid(id);
+		for(ManagerEmployeeRelation r:relations) {
+			MERService.deleteById(r.getId());
+		}
+		employeeService.deleteById(id);
+		return "redirect:/manager/show_employee_list";
 	}
 }

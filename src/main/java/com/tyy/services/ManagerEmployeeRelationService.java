@@ -35,4 +35,7 @@ public class ManagerEmployeeRelationService {
 		return repo.findAll();
 	}
 	
+	public List<ManagerEmployeeRelation> findAllByEmployeeid(int id){
+		return repo.findAllByEmployeeid(id);
+	}
 }

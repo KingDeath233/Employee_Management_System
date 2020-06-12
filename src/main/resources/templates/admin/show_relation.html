@@ -14,30 +14,33 @@
 </head>
 
 <body>
-    <div th:replace="template :: template">
-    </div>
-    <div id="content">
-        <table class="table table-bordered table-striped">
-            <thead class ="thead-dark">
-                <tr>
-					<th>Manager Name</th>
-					<th>Employee Name</th>
-                    <th>Function</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- th:each loops over each member of ${employees} list
-            tempEmployee is a randomly declared variable used in this html page only, employees is the model attribute made in the EmployeeController -->
-                <tr th:each=" temp: ${relations}">
-                    <td th:text="${temp.manager_last_name } + ' ' + ${temp.manager_first_name}"></td>
-                    <td th:text="${temp.employee_last_name } + ' ' + ${temp.employee_first_name}"></td>
-                    <td><a th:href="@{/admin/add_relation}"
-                    class="btn btn-info btn-sm">Add</a>
-                        <a th:href="@{/admin/delete_relation(id = ${temp.id})}"
-                    class="btn btn-info btn-sm">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <div th:replace="/fragements/side_bar_template :: side_bar"></div>
+    <div class="content">
+        <div th:replace="/fragements/header_template :: header"></div>
+        <div class="page">
+            <table class="table table-bordered table-striped">
+                <thead class ="thead-dark">
+                    <tr>
+                        <th>Manager Name</th>
+                        <th>Employee Name</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- th:each loops over each member of ${employees} list
+                tempEmployee is a randomly declared variable used in this html page only, employees is the model attribute made in the EmployeeController -->
+                    <tr th:each=" temp: ${relations}">
+                        <td th:text="${temp.manager_last_name } + ' ' + ${temp.manager_first_name}"></td>
+                        <td th:text="${temp.employee_last_name } + ' ' + ${temp.employee_first_name}"></td>
+                        <td><a th:href="@{/admin/add_relation}"
+                        class="btn btn-info btn-sm">Add</a>
+                            <a th:href="@{/admin/delete_relation(id = ${temp.id})}"
+                        class="btn btn-info btn-sm">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="/fragements/footer_template :: footer"></div>
     </div>
 </body>
 

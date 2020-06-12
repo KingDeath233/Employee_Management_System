@@ -230,28 +230,6 @@ body{
     padding: 0.5rem 4rem;
 }
 
-/* 
-    Group
-*/
-.content{
-    position: absolute;
-    top: 0;
-    right: 0;
-    -webkit-transition: width 0.3s linear;
-    transition: width 0.3s linear;
-    width: calc(100% - 200px);
-    background-color: #F4F7FA;
-    min-height: 100vh;
-    padding-bottom: 50px;
-}
-
-.content.active {
-    width: calc(100% - 70px);
-  }
-
-
-
-
 /*
  Top Navbar 
  */
@@ -403,28 +381,19 @@ body{
     Footer
 */
 
+#main-footer *{
+  position:relative;
+  top:10%;
+}
+
 #main-footer{
+    height:40px;
     border-top: slateblue 2px solid;
     bottom: 0;
     position: absolute;
     width: 100%;
     font-weight:bold;
     color:wheat;
-}
-
-/*
-    Content
-*/
-
-#content{
-    width:90%;
-    height:calc(100% - 90px);
-    top:48px;
-    left:200px;
-    position:absolute;
-}
-#content a{
-    text-decoration: none;
 }
 
 /* 
@@ -520,6 +489,39 @@ body{
     font-size: 0.9em;
   }
 }
+
+/*
+    Content
+*/
+
+.content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-transition: width 0.3s linear;
+    transition: width 0.3s linear;
+    width: calc(100% - 200px);
+    background-color: #F4F7FA;
+    height: 100%;
+    padding-bottom: 50px;
+}
+
+.content.active {
+    width: calc(100% - 70px);
+  }
+
+
+.page{
+    width:100%;
+    height:85%;
+    position: absolute;
+    top:3rem;
+    right:0;
+}
+.page a{
+    text-decoration: none;
+}
+
 
 .error{
   color:red;

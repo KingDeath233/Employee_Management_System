@@ -8,6 +8,6 @@ import com.tyy.entities.Schedule;
 
 public interface ScheduleDAO extends JpaRepository<Schedule, Integer>{
 
-	public List<Schedule> findAllByEmployeeId(int id);
+	public List<Schedule> findAllByEmployeeIdOrderByStartTime(int id);
 	
 }

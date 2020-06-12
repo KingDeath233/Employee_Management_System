@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Employee Management System</title>
+</head>
+
+<body>
+	<div th:replace="/fragements/side_bar_template :: side_bar"></div>
+	<div class="content">
+		<div th:replace="/fragements/header_template :: header"></div>
+		<div th:replace="/fragements/footer_template :: footer"></div>
+		<div class="page">
+            <table class="table table-bordered table-striped">
+                <thead class ="thead-dark">
+                    <tr>
+                        <th>Employee Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Account</th>
+						<th>Position</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- th:each loops over each member of ${employees} list
+                tempEmployee is a randomly declared variable used in this html page only, employees is the model attribute made in the EmployeeController -->
+                    <tr th:each=" temp: ${stuff}">
+                        <td th:text="${temp.lastname} + ' ' + ${temp.firstname}"></td>
+						<td th:text="${temp.email}"></td>
+						<td th:text="${temp.phone}"></td>
+						<td th:text="${temp.username}"></td>
+						<td><span th:if="${temp.ismanager}==1">Manager</span><span th:if="${temp.ismanager}==0">Employee</span></td>
+                        <td><a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/update_employee(id = ${temp.id})}"
+                        class="btn btn-info btn-sm">Update</a>
+                            <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/delete_employee(id = ${temp.id})}"
+						class="btn btn-info btn-sm">Delete</a><span sec:authorize="hasAnyRole('MANAGER')">Access denied!</span></td>
+                    </tr>
+                </tbody>
+			</table>
+			<a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/add_employee}" class="btn btn-info btn-sm">Add</a>
+		</div>
+	</div>
+
+</body>
+
+
+</html>

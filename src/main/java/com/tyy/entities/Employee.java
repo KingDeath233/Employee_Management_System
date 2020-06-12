@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
@@ -33,6 +34,7 @@ public class Employee {
 	@Column(name="lastname")
 	private String lastname;
 	
+	@NotEmpty(message="Not an valid email!")
 	@Email(message="Not an valid email!")
 	@Column(name="email")
 	private String email;
@@ -41,6 +43,7 @@ public class Employee {
 	@Column(name="phone")
 	private String phone;
 	
+	@NotEmpty(message="Do not have any available account!")
 	@Column(name="username")
 	private String username;
 	

@@ -7,7 +7,6 @@ $(document).ready(function () {
         // blocks default event handling
         e.preventDefault();
 
-
         if ($(window).outerWidth() > 1194) {
             // becomes a little smaller on larger screens
             $('nav.side-navbar').toggleClass('shrink');

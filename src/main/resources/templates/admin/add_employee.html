@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    
+    <title>Employee Management System</title>
+
+
+</head>
+
+<body>
+    <div th:replace="/fragements/side_bar_template :: side_bar"></div>
+    <div class="content">
+        <div th:replace="/fragements/header_template :: header"></div>
+        <div th:replace="/fragements/footer_template :: footer"></div>
+        <div class="page">
+			<form th:action="@{/admin/process-add_employee}" th:object="${newEmployee}" method="POST">
+                <!-- hidden form field to handle update (ones with existing id number) -->
+				<input type="hidden" th:field="*{id}">
+				<div style="margin-bottom:10px;">
+					<input class="form-control" type="text" th:field="*{firstname}" placeholder="First name">
+				</div>
+				<div class="error" th:if="*{#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
+				<div style="margin-bottom:10px;">
+					<input class="form-control" type="text" th:field="*{lastname}" placeholder="Last name">
+				</div>
+				<div class="error" th:if="*{#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
+				<div style="margin-bottom:10px;">
+					<input class="form-control" type="text" th:field="*{email}" placeholder="Email">
+				</div>
+				<div class="error" th:if="*{#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				<div style="margin-bottom:10px;">
+					<input class="form-control" type="text" th:field="*{phone}" placeholder="Phone number">
+				</div>
+				<div class="error" th:if="*{#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+				<div style="margin-bottom:10px;">
+					<select style="width:100%" th:field="*{username}">
+						<option th:each="i:${avaiable_list}" th:text="${i}" th:value="${i}"></option>
+					</select>
+				</div>
+				<div class="error" th:if="*{#fields.hasErrors('username')}" th:errors="*{username}"></div>
+				<div style="margin-bottom:10px;">
+					<select style="width:100%" th:field="*{ismanager}">
+						<option th:text="Manager" th:value="1"></option>
+						<option th:text="Employee" th:value="0"></option>
+					</select>
+				</div>
+				<button th:if="*{#fields.hasErrors()}" class="btn btn-info col-2" type="button" onclick="javascript:history.go(-1);">Back</button>
+				<button th:if="!*{#fields.hasErrors()}" class="btn btn-info col-2" type="submit">Add or Update</button>
+                <button class="btn btn-info col-2" type="button" onclick="window.location.href='/manager/show_employee_list'">Return</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

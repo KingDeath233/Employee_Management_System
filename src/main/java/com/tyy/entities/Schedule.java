@@ -1,5 +1,6 @@
 package com.tyy.entities;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -44,4 +45,12 @@ public class Schedule {
 	@NotEmpty
 	@Column(name="loc")
 	private String loc;
+	
+	@NotEmpty
+	@Column(name="date")
+	private Date date;
+	
+	@NotEmpty
+	@Column(name="time")
+	private Time time;
 }

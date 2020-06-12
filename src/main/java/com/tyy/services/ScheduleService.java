@@ -15,7 +15,7 @@ public class ScheduleService {
 	ScheduleDAO repo;
 	
 	public List<Schedule> findAllByEmployeeId(int id){
-		return repo.findAllByEmployeeId(id);
+		return repo.findAllByEmployeeIdOrderByStartTime(id);
 	}
 	
 }

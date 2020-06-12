@@ -1,5 +1,6 @@
 package com.tyy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,8 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tyy.dto.PersonalScheduleDTO;
 import com.tyy.entities.Employee;
 import com.tyy.entities.Schedule;
 import com.tyy.services.EmployeeService;
@@ -49,7 +50,19 @@ public class EmployeeController{
 	}
 	
 	@GetMapping("/employee/my_schedule")
-	public String viewMySchedule() {
+	public String viewMySchedule(Model theModel) {
+		int eid = employeeService.getCurrentEmployeeID();
+		List<Schedule> personalSchedules = scheduleService.findAllByEmployeeId(eid);
+		List<PersonalScheduleDTO> psdto = new ArrayList<PersonalScheduleDTO>(); 
+		System.out.println(psdto);
+		/*String[] day = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+		for(String d:day) {
+			psdto.add(new PersonalScheduleDTO(d));
+		}
+		for(Schedule ps:personalSchedules) {
+			
+		}*/
+		theModel.addAttribute("psdto",psdto);
 		return "/employee/my_schedule";
 	}
 }

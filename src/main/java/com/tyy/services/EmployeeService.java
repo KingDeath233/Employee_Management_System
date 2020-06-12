@@ -36,4 +36,12 @@ public class EmployeeService {
 	public List<Employee> findAllManager(){
 		return repo.findAllByIsmanagerOrderByLastnameAscFirstnameAsc(1);
 	}
+	
+	public Employee findEmployee(int id) {
+		return repo.getOne(id);
+	}
+	
+	public void deleteById(int id) {
+		repo.deleteById(id);
+	}
 }
