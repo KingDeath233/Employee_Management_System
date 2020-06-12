@@ -100,9 +100,14 @@ public class AdminController {
 		return "admin/add_employee";
 	}
 	
-	@GetMapping("/test")
+	@GetMapping("/work-on/test")
 	public String test() {
 		return "table-example";
+	}
+	
+	@GetMapping("/work-on/test1")
+	public String test1() {
+		return "work_on_template";
 	}
 	
 	@GetMapping("/admin/delete_employee")
