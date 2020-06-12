@@ -2,6 +2,7 @@ $(document).ready(function () {
 
 
 
+
     // Side Navbar toggle button
     $('#toggle-btn').on('click', function (e) {
         // blocks default event handling
@@ -17,7 +18,7 @@ $(document).ready(function () {
         }
 
         // Enable tooltips
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
 
 
 

@@ -391,19 +391,25 @@ body{
   font-weight: bold;
 }
 
-#main-footer *{
-  position:relative;
-  top:10%;
+
+/*
+    Content
+*/
+
+.content{
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transition: width 0.3s linear;
+  transition: width 0.3s linear;
+  width: calc(100% - 200px);
+  background-color: #F4F7FA;
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
 
-#main-footer{
-    height:40px;
-    border-top: slateblue 2px solid;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    font-weight:bold;
-    color:wheat;
+.content.active {
+  width: calc(100% - 70px);
 }
 
 /*
@@ -448,6 +454,10 @@ body{
 */
 @media (max-width: 1199px){
   .content{
+    width: 100%;
+  }
+
+  .content.active{
     width: 100%;
   }
 
