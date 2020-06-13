@@ -23,7 +23,39 @@
         <div th:replace="/fragements/header_template :: header"></div>
         <div th:replace="/fragements/footer_template :: footer"></div>
         <div class="page">
-            
+            <table class="table table-bordered table-striped">
+                <thead class ="thead-dark">
+                    <tr>
+                        <th>Account</th>
+						<th>Enabled</th>
+						<th>Authorities</th>
+                        <th colspan="2">Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- th:each loops over each member of ${employees} list
+                tempEmployee is a randomly declared variable used in this html page only, employees is the model attribute made in the EmployeeController -->
+                    <tr th:each=" temp: ${users}">
+						<td th:text="${temp.username}"></td>
+						<td th:text="${temp.enabled}==1?'Yes':'No'"></td>
+						<td th:text="${temp.auth}"></td>
+						<td th:if="!${temp.auth!='ROLE_ADMIN'}"></td>
+						<td th:if="${temp.auth!='ROLE_ADMIN'}">
+							<form style="height:15px;" method="POST" th:action="@{/admin/process-enable(un=${temp.username})}">
+							<button th:if="${temp.enabled}==1" class="btn btn-info" type="submit">Disabled</button>
+							<button th:if="${temp.enabled}==0" class="btn btn-info" type="submit">Enabled</button>
+							</form>
+						</td>
+						<td th:if="!${temp.auth!='ROLE_ADMIN'}"></td>
+						<td th:if="${temp.auth!='ROLE_ADMIN'}">
+							<form style="height:15px;" method="POST" th:action="@{/admin/process-position(un=${temp.username})}">
+							<button th:if="${temp.auth}!='ROLE_MANAGER'" class="btn btn-info" type="submit">Promotion</button>
+							<button th:if="${temp.auth}=='ROLE_MANAGER'" class="btn btn-info" type="submit">Demotion</button>
+							</form>
+						</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>

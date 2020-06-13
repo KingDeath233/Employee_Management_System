@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 public class UserDTO implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
+	@Id
 	@NotEmpty(message="Username cannot be empty!")
 	private String username;
 	@Length(min=5, message="Password should be more than 5 digits!")

@@ -38,4 +38,8 @@ public class ManagerEmployeeRelationService {
 	public List<ManagerEmployeeRelation> findAllByEmployeeid(int id){
 		return repo.findAllByEmployeeid(id);
 	}
+	
+	public List<ManagerEmployeeRelation> findAllByManagerid(int id){
+		return repo.findAllByManagerid(id);
+	}
 }

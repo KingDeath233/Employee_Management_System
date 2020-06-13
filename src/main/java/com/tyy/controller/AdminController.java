@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tyy.entities.Employee;
 import com.tyy.entities.ManagerEmployeeRelation;
+import com.tyy.entities.User;
 import com.tyy.services.AdminService;
 import com.tyy.services.EmployeeService;
 import com.tyy.services.ManagerEmployeeRelationService;
+import com.tyy.services.SystemUserDetailsService;
 
 @Controller
 public class AdminController {
@@ -28,17 +30,13 @@ public class AdminController {
 	EmployeeService employeeService;
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	SystemUserDetailsService userService;
 	
 	@GetMapping("/admin/show_relation")
 	public String showRelation(Model theModel) {
 		theModel.addAttribute("relations",MERService.findAllFromManagerEmployeeRelation());
 		return "/admin/show_relation";
-	}
-
-	@GetMapping("/admin/delete_relation")
-	public String deleteRelation(@RequestParam("id") int id) {
-		MERService.deleteById(id);
-		return "redirect:/admin/show_relation";
 	}
 	
 	@GetMapping("/admin/add_relation")
@@ -59,6 +57,12 @@ public class AdminController {
 			MERService.save(relation);
 			return "redirect:/admin/show_relation";
 		}
+	}
+	
+	@GetMapping("/admin/delete_relation")
+	public String deleteRelation(@RequestParam("id") int id) {
+		MERService.deleteById(id);
+		return "redirect:/admin/show_relation";
 	}
 	
 	@GetMapping("/manager/show_employee_list")
@@ -85,7 +89,7 @@ public class AdminController {
 			return "/admin/add_employee";
 		}
 		else {
-			employeeService.save(e);
+			userService.checkIsManager(e);
 			return "redirect:/manager/show_employee_list";
 		}
 	}
@@ -100,6 +104,34 @@ public class AdminController {
 		return "admin/add_employee";
 	}
 	
+	@GetMapping("/admin/delete_employee")
+	public String deleteEmployee(@RequestParam("id") int id) {
+		List<ManagerEmployeeRelation> relations = MERService.findAllByEmployeeid(id);
+		for(ManagerEmployeeRelation r:relations) {
+			MERService.deleteById(r.getId());
+		}
+		employeeService.deleteById(id);
+		return "redirect:/manager/show_employee_list";
+	}
+	
+	@GetMapping("/admin/show_users")
+	public String showUsers(Model theModel) {
+		theModel.addAttribute("users",userService.findAllUserWithAuth());
+		return "admin/show_users";
+	}
+	
+	@PostMapping("/admin/process-enable")
+	public String processEnable(@RequestParam("un") String username) {
+		userService.changeEnable(username);
+		return "redirect:/admin/show_users";
+	}
+	
+	@PostMapping("/admin/process-position")
+	public String processPosition(@RequestParam("un") String username) {
+		userService.changePosition(username);
+		return "redirect:/admin/show_users";
+	}
+	
 	@GetMapping("/work-on/test")
 	public String test() {
 		return "table-example";
@@ -110,13 +142,4 @@ public class AdminController {
 		return "work_on_template";
 	}
 	
-	@GetMapping("/admin/delete_employee")
-	public String deleteEmployee(@RequestParam("id") int id) {
-		List<ManagerEmployeeRelation> relations = MERService.findAllByEmployeeid(id);
-		for(ManagerEmployeeRelation r:relations) {
-			MERService.deleteById(r.getId());
-		}
-		employeeService.deleteById(id);
-		return "redirect:/manager/show_employee_list";
-	}
 }

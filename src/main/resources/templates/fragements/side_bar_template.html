@@ -20,6 +20,10 @@
                         <a href="/"><i class="fa fa-home"></i>Home</a>
                     </li>
                     <li>
+                        <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/show_users}"><i
+                                class="fa fa-home"></i>Manage Authorities</a>
+                    </li>
+                    <li>
                         <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/show_relation}"><i
                                 class="fa fa-home"></i>Manage Relation</a>
                     </li>

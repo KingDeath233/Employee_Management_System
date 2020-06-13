@@ -19,4 +19,6 @@ public interface ManagerEmployeeRelationDAO extends JpaRepository<ManagerEmploye
 	public List<ManagerEmployeeRelation> findAll();
 	
 	public List<ManagerEmployeeRelation> findAllByEmployeeid(int id);
+	
+	public List<ManagerEmployeeRelation> findAllByManagerid(int id);
 }
