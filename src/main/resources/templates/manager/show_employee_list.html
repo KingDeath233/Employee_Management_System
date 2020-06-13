@@ -43,11 +43,12 @@
                         <td><a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/update_employee(id = ${temp.id})}"
                         class="btn btn-info btn-sm">Update</a>
                             <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/delete_employee(id = ${temp.id})}"
-						class="btn btn-info btn-sm">Delete</a><span sec:authorize="hasAnyRole('MANAGER')">Access denied!</span></td>
+                        class="btn btn-info btn-sm">Delete</a>
+                        <span sec:authorize="hasAnyRole('MANAGER')">Access denied!</span></td>
                     </tr>
                 </tbody>
 			</table>
-			<a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/add_employee}" class="btn btn-info btn-sm">Add</a>
+			<a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/add_employee}" class="btn btn-info col-1">Add</a>
 		</div>
 	</div>
 

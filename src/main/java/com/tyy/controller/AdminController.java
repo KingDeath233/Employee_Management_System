@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tyy.entities.Employee;
 import com.tyy.entities.ManagerEmployeeRelation;
-import com.tyy.entities.User;
 import com.tyy.services.AdminService;
 import com.tyy.services.EmployeeService;
 import com.tyy.services.ManagerEmployeeRelationService;
@@ -121,14 +120,20 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/process-enable")
-	public String processEnable(@RequestParam("un") String username) {
+	public String processEnable(@RequestParam("username") String username) {
 		userService.changeEnable(username);
 		return "redirect:/admin/show_users";
 	}
 	
 	@PostMapping("/admin/process-position")
-	public String processPosition(@RequestParam("un") String username) {
+	public String processPosition(@RequestParam("username") String username) {
 		userService.changePosition(username);
+		return "redirect:/admin/show_users";
+	}
+	
+	@GetMapping("/admin/reset-password")
+	public String resetPassword(@RequestParam("username") String username) {
+		userService.resetPassword(username);
 		return "redirect:/admin/show_users";
 	}
 	
@@ -140,6 +145,11 @@ public class AdminController {
 	@GetMapping("/work-on/test1")
 	public String test1() {
 		return "work_on_template";
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error";
 	}
 	
 }

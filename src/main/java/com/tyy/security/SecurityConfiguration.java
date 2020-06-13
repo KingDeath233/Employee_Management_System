@@ -14,10 +14,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
+import com.tyy.entities.Resource;
+import com.tyy.services.ResourceService;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private ResourceService resourceService;
 	
 	@Autowired
 	@Qualifier("springDataSource")
@@ -47,13 +53,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.dataSource(springDataSource);
 	}
 
+	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		for(Resource r:resourceService.findAll()) {
+			String[] role = r.getRoles().split(",");
+			http.authorizeRequests().antMatchers(r.getUrl()).hasAnyRole(role);
+		}
 		http.authorizeRequests()
 			.antMatchers("/login","/register","/process-register").permitAll()
-			.antMatchers("/admin/**").hasAnyRole("ADMIN")
-			.antMatchers("/manager/**").hasAnyRole("ADMIN","MANAGER")
-			.antMatchers("/employee/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
 			.anyRequest().authenticated()
 			.and()
 		.formLogin()
