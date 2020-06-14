@@ -104,14 +104,23 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/delete_employee")
-	public String deleteEmployee(@RequestParam("id") int id) {
-		List<ManagerEmployeeRelation> relations = MERService.findAllByEmployeeid(id);
-		for(ManagerEmployeeRelation r:relations) {
-			MERService.deleteById(r.getId());
-		}
-		employeeService.deleteById(id);
-		return "redirect:/manager/show_employee_list";
-	}
+    public String deleteEmployee(@RequestParam("id") int id) {
+        Employee tmp = employeeService.findEmployee(id);
+        if(tmp.getIsmanager()==0) {
+            List<ManagerEmployeeRelation> relations = MERService.findAllByEmployeeid(id);
+            for(ManagerEmployeeRelation r:relations) {
+                MERService.deleteById(r.getId());
+            }
+        }
+        else {
+            List<ManagerEmployeeRelation> relations = MERService.findAllByManagerid(id);
+            for(ManagerEmployeeRelation r:relations) {
+                MERService.deleteById(r.getId());
+            }
+        }
+        employeeService.deleteById(id);
+        return "redirect:/manager/show_employee_list";
+    }
 	
 	@GetMapping("/admin/show_users")
 	public String showUsers(Model theModel) {
@@ -139,7 +148,7 @@ public class AdminController {
 	
 	@GetMapping("/work-on/test")
 	public String test() {
-		return "table-example";
+		return "work-on/table-example";
 	}
 	
 	@GetMapping("/work-on/test1")
