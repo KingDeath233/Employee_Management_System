@@ -143,5 +143,18 @@ public class SystemUserDetailsService implements UserDetailsService {
 			arepo.save(tmp);
 		}
 	}
+	
+	public void resetPassword(String username) {
+		User tmp = findAllByUsername(username).get(0);
+		tmp.setPassword(encoder.encode("00000000"));
+		save(tmp);
+	}
+	
+	public void changePassword(String newpass) {
+		User tmp = findAllByUsername(getUsername()).get(0);
+		tmp.setPassword(encoder.encode(newpass));
+		save(tmp);
+	}
+
 }
 

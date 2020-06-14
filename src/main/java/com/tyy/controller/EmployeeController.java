@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.tyy.dto.PasswordDTO;
 import com.tyy.dto.PersonalScheduleDTO;
+import com.tyy.dto.UserDTO;
 import com.tyy.entities.Employee;
 import com.tyy.entities.Schedule;
 import com.tyy.services.EmployeeService;
@@ -47,6 +49,22 @@ public class EmployeeController{
 			employeeService.save(employee);
 			return "redirect:/";
 		}
+	}
+	
+	@GetMapping("/employee/change_password")
+	public String changePassword(Model theModel) {
+		PasswordDTO pdto = new PasswordDTO();
+		theModel.addAttribute("psdto", pdto);
+		return "/employee/change_password";
+	}
+	
+	@PostMapping("employee/process-password")
+	public String processPassword(@Valid @ModelAttribute("psdto") PasswordDTO psdto,BindingResult result, Model theModel) {
+		if(result.hasErrors()){
+			return "/employee/change_password";
+		}
+		userService.changePassword(psdto.getNewpass());
+		return "redirect:/";
 	}
 	
 	@GetMapping("/employee/my_schedule")
