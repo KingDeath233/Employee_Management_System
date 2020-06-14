@@ -6,6 +6,6 @@ import com.tyy.entities.SerialCode;
 
 public interface SerialCodeDAO extends JpaRepository<SerialCode, Integer>{
 	
-	public SerialCode findByCode(String code);
-	
+	public SerialCode findTop1ByCode(String code);
+
 }

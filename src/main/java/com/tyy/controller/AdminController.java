@@ -64,15 +64,6 @@ public class AdminController {
 		return "redirect:/admin/show_relation";
 	}
 	
-	@GetMapping("/manager/show_employee_list")
-	public String showEmployeeList(Model theModel) {
-		List<Employee> m = employeeService.findAllManager();
-		List<Employee> e = employeeService.findAllEmployee();
-		m.addAll(e);
-		theModel.addAttribute("stuff", m);
-		return "/manager/show_employee_list";
-	}
-	
 	@GetMapping("/admin/add_employee")
 	public String addEmployee(Model theModel) {
 		Employee e = new Employee();
@@ -146,14 +137,14 @@ public class AdminController {
 		return "redirect:/admin/show_users";
 	}
 	
-	@GetMapping("/work-on/test")
+	@GetMapping("/test")
 	public String test() {
 		return "work-on/table-example";
 	}
 	
-	@GetMapping("/work-on/test1")
+	@GetMapping("/test1")
 	public String test1() {
-		return "work_on_template";
+		return "/work0on/work_on_template";
 	}
 	
 	@GetMapping("/error")

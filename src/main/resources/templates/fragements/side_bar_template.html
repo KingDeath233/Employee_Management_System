@@ -28,6 +28,10 @@
                                 class="fa fa-home"></i>Manage Relation</a>
                     </li>
                     <li>
+                        <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" th:href="@{/manager/generate_code}"><i
+                                class="fa fa-home"></i>Generate Code</a>
+                    </li>
+                    <li>
                         <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" th:href="@{/manager/show_employee_list}"><i
                                 class="fa fa-home"></i>View All Employee</a>
                     </li>

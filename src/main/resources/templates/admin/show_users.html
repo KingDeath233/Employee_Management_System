@@ -42,8 +42,8 @@
 						<td th:if="!${temp.auth!='ROLE_ADMIN'}"></td>
 						<td th:if="${temp.auth!='ROLE_ADMIN'}">
 							<form style="height:15px;" method="POST" th:action="@{/admin/process-enable(username=${temp.username})}">
-							<button th:if="${temp.enabled}==1" class="btn btn-info" type="submit">Disabled</button>
-                            <button th:if="${temp.enabled}==0" class="btn btn-info" type="submit">Enabled</button>
+							<button th:if="${temp.enabled}==1" class="btn btn-info" type="submit">Disable</button>
+                            <button th:if="${temp.enabled}==0" class="btn btn-info" type="submit">Enable</button>
                             <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/reset-password(username = ${temp.username})}"
                         class="btn btn-info">Reset Password</a>
 							</form>

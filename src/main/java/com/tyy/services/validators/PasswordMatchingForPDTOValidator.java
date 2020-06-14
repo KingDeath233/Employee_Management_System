@@ -4,7 +4,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import com.tyy.dto.PasswordDTO;
-import com.tyy.dto.UserDTO;
 
 public class PasswordMatchingForPDTOValidator implements ConstraintValidator<PasswordMatchingForPDTO, PasswordDTO> {
 

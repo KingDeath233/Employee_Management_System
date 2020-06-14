@@ -64,7 +64,7 @@ public class SystemUserDetailsService implements UserDetailsService {
 		newUser.setAuthorities(auth);
 		String oldpass = newUser.getPassword();
 		newUser.setPassword(encoder.encode(oldpass));
-			jdbcUserDetailsManager.createUser(newUser);
+		jdbcUserDetailsManager.createUser(newUser);
 		return true;
 	}
 	

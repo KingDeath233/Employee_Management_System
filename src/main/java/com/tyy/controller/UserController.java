@@ -53,6 +53,7 @@ public class UserController{
 		else if(!userService.registerUser(newUser,type)) {
 			return "redirect:/register?userExists";
 		}
+		serialCodeService.delete(serialCodeService.findByCode(newUser.getCode()));
 		return "redirect:/login?signedup";
 	}
 	
