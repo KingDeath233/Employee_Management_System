@@ -1,13 +1,19 @@
 package com.tyy.controller;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tyy.entities.Employee;
 import com.tyy.entities.SerialCode;
@@ -24,11 +30,16 @@ public class ManagerController {
 	SerialCodeService serialService;
 	
 	@GetMapping("/manager/show_employee_list")
-	public String showEmployeeList(Model theModel) {
-		List<Employee> m = employeeService.findAllManager();
-		List<Employee> e = employeeService.findAllEmployee();
-		m.addAll(e);
-		theModel.addAttribute("stuff", m);
+	public String showEmployeeList(Model theModel, @RequestParam("page")Optional<Integer> page, @RequestParam("size")Optional<Integer> size){
+		 int currentPage = page.orElse(1);
+		 int pageSize = size.orElse(5);
+		 Page<Employee> employeePage = employeeService.findPaginated(PageRequest.of(currentPage-1, pageSize));
+		 theModel.addAttribute("employeePage",employeePage);
+		 int totalPages = employeePage.getTotalPages();
+		 if(totalPages>0) {
+			 List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			 theModel.addAttribute("pageNumbers",pageNumbers);
+		 }
 		return "/manager/show_employee_list";
 		
 	}
