@@ -1,8 +1,13 @@
 package com.tyy.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tyy.dao.EmployeeDAO;
@@ -15,6 +20,26 @@ public class EmployeeService {
 	private EmployeeDAO repo;
 	@Autowired
 	private SystemUserDetailsService userservice;
+	
+	public Page<Employee> findPaginated(Pageable pageable){
+		List<Employee> employees = findAllEmployee();
+
+		int pageSize = pageable.getPageSize();
+		int currentPage = pageable.getPageNumber();
+		int startItem = currentPage * pageSize;
+		
+		System.out.println("pageSize: "+pageSize+"\ncurrentPage "+currentPage+"\nStartItem: "+startItem);
+		
+		List<Employee> list;
+		if(employees.size()<startItem) {
+			list= Collections.emptyList();
+		}else {
+			int toIndex = Math.min(startItem + pageSize,  employees.size());
+			list=employees.subList(startItem, toIndex);
+		}
+		Page<Employee> employeePage = new PageImpl<Employee>(list, PageRequest.of(currentPage, pageSize),employees.size());
+		return employeePage;
+	}
 	
 	public Employee findByUsername(String username) {
 		return repo.findByUsername(username);
@@ -35,6 +60,12 @@ public class EmployeeService {
 	
 	public List<Employee> findAllManager(){
 		return repo.findAllByIsmanagerOrderByLastnameAscFirstnameAsc(1);
+	}
+	
+	public List<Employee> findAllEmployeeAndManager(){
+		List<Employee> both = findAllManager();
+		both.addAll(findAllEmployee());
+		return both;
 	}
 	
 	public Employee findEmployee(int id) {

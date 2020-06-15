@@ -34,7 +34,7 @@
                 <tbody>
                     <!-- th:each loops over each member of ${employees} list
                 tempEmployee is a randomly declared variable used in this html page only, employees is the model attribute made in the EmployeeController -->
-                    <tr th:each=" temp: ${stuff}">
+                    <tr th:each=" temp, iStat: ${employeePage.content}" th:style="${iStat.odd}?'font-weight:bold;'" th:alt-title="${iStat.even}?'even':'odd'">
                         <td th:text="${temp.lastname} + ' ' + ${temp.firstname}"></td>
 						<td th:text="${temp.email}"></td>
 						<td th:text="${temp.phone}"></td>
@@ -48,6 +48,13 @@
                     </tr>
                 </tbody>
 			</table>
+			<div th:if="${employeePage.totalPages>0}" class="pagination"
+				th:each="pageNumber : ${pageNumbers}">
+				<a th:href="@{/manager/show_employee_list (page=${pageNumber}, size=${employeePage.size})}"
+					th:text=${pageNumber}
+					th:class="${pageNumber==employeePage.number + 1}? active"></a>
+			</div>
+			
 			<a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/add_employee}" class="btn btn-info col-1">Add</a>
 		</div>
 	</div>
