@@ -22,7 +22,7 @@ public class EmployeeService {
 	private SystemUserDetailsService userservice;
 	
 	public Page<Employee> findPaginated(Pageable pageable){
-		List<Employee> employees = findAllEmployee();
+		List<Employee> employees = findAllEmployeeAndManager();
 
 		int pageSize = pageable.getPageSize();
 		int currentPage = pageable.getPageNumber();
