@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.tyy.dto.UserDTOforAdmin;
 import com.tyy.entities.Employee;
 import com.tyy.entities.ManagerEmployeeRelation;
 import com.tyy.services.AdminService;
@@ -114,9 +118,14 @@ public class AdminController {
     }
 	
 	@GetMapping("/admin/show_users")
-	public String showUsers(Model theModel) {
-		theModel.addAttribute("users",userService.findAllUserWithAuth());
-		return "admin/show_users";
+	public String showUsers(Model theModel,@RequestParam(defaultValue = "1") Integer pageNum, 
+			@RequestParam(defaultValue = "5") Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<UserDTOforAdmin> tmp = userService.findAllUserWithAuth();
+		PageInfo<UserDTOforAdmin> pageinfo = new PageInfo<UserDTOforAdmin>(tmp,5);
+		theModel.addAttribute("users",tmp);
+		theModel.addAttribute("pagehelper",pageinfo);
+		return "/admin/show_users";
 	}
 	
 	@PostMapping("/admin/process-enable")
