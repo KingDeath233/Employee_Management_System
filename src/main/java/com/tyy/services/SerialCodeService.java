@@ -7,7 +7,7 @@ import com.tyy.dao.SerialCodeDAO;
 import com.tyy.entities.SerialCode;
 
 @Service
-public class SerialCodeService {
+public class SerialCodeService extends MainService {
 	@Autowired
 	private SerialCodeDAO repo;
 	

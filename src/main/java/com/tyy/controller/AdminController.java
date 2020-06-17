@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.tyy.dto.UserDTOforAdmin;
 import com.tyy.entities.Employee;
 import com.tyy.entities.ManagerEmployeeRelation;
@@ -25,7 +22,7 @@ import com.tyy.services.ManagerEmployeeRelationService;
 import com.tyy.services.SystemUserDetailsService;
 
 @Controller
-public class AdminController {
+public class AdminController extends MainController{
 	
 	@Autowired
 	ManagerEmployeeRelationService MERService;
@@ -118,13 +115,9 @@ public class AdminController {
     }
 	
 	@GetMapping("/admin/show_users")
-	public String showUsers(Model theModel,@RequestParam(defaultValue = "1") Integer pageNum, 
-			@RequestParam(defaultValue = "5") Integer pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
+	public String showUsers(Model theModel) {
 		List<UserDTOforAdmin> tmp = userService.findAllUserWithAuth();
-		PageInfo<UserDTOforAdmin> pageinfo = new PageInfo<UserDTOforAdmin>(tmp,5);
 		theModel.addAttribute("users",tmp);
-		theModel.addAttribute("pagehelper",pageinfo);
 		return "/admin/show_users";
 	}
 	
@@ -153,7 +146,12 @@ public class AdminController {
 	
 	@GetMapping("/test1")
 	public String test1() {
-		return "/work0on/work_on_template";
+		return "/work-on/work_on_template";
+	}
+	
+	@GetMapping("/test2")
+	public String test2() {
+		return "/work-on/page";
 	}
 	
 	@GetMapping("/error")

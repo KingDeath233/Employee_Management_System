@@ -9,7 +9,7 @@ import com.tyy.dao.ScheduleDAO;
 import com.tyy.entities.Schedule;
 
 @Service
-public class ScheduleService {
+public class ScheduleService extends MainService {
 
 	@Autowired
 	ScheduleDAO repo;

@@ -1,7 +1,5 @@
 package com.tyy;
 
-import java.util.Arrays;
-
 public class test {
 	
 	public static void main (String args[]) {

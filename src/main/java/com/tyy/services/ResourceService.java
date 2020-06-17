@@ -9,7 +9,7 @@ import com.tyy.dao.ResourceDAO;
 import com.tyy.entities.Resource;
 
 @Service
-public class ResourceService {
+public class ResourceService extends MainService{
 	@Autowired
 	ResourceDAO repo;
 	

@@ -11,7 +11,7 @@ import com.tyy.entities.ManagerEmployeeRelation;
 
 
 @Service
-public class ManagerEmployeeRelationService {
+public class ManagerEmployeeRelationService extends MainService{
 	
 	@Autowired ManagerEmployeeRelationDAO repo;
 	

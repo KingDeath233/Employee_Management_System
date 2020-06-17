@@ -1,5 +1,6 @@
 package com.tyy.services;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,30 +15,28 @@ import com.tyy.dao.EmployeeDAO;
 import com.tyy.entities.Employee;
 
 @Service
-public class EmployeeService {
+public class EmployeeService extends MainService{
 	
 	@Autowired
 	private EmployeeDAO repo;
 	@Autowired
 	private SystemUserDetailsService userservice;
 	
-	public Page<Employee> findPaginated(Pageable pageable){
+	public Page<Employee> findAllEmployeeAndManagerPage(Pageable pageable, String key){
 		List<Employee> employees = findAllEmployeeAndManager();
-
-		int pageSize = pageable.getPageSize();
-		int currentPage = pageable.getPageNumber();
-		int startItem = currentPage * pageSize;
-		
-		System.out.println("pageSize: "+pageSize+"\ncurrentPage "+currentPage+"\nStartItem: "+startItem);
-		
-		List<Employee> list;
-		if(employees.size()<startItem) {
-			list= Collections.emptyList();
-		}else {
-			int toIndex = Math.min(startItem + pageSize,  employees.size());
-			list=employees.subList(startItem, toIndex);
+		List<Employee> key_search = new ArrayList<Employee>();
+		if(key.equals("")) {
+			key_search = employees;
 		}
-		Page<Employee> employeePage = new PageImpl<Employee>(list, PageRequest.of(currentPage, pageSize),employees.size());
+		else {
+			for(Employee e:employees) {
+				if(e.search().toLowerCase().contains(key.toLowerCase())) {
+					key_search.add(e);
+				}
+			}
+		}
+		List<Employee> list = searchUsingKey(key_search, pageable);
+		Page<Employee> employeePage = new PageImpl<Employee>(list, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()),key_search.size());
 		return employeePage;
 	}
 	

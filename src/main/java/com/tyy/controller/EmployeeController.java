@@ -1,8 +1,5 @@
 package com.tyy.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +9,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tyy.dto.PasswordDTO;
-import com.tyy.dto.PersonalScheduleDTO;
-import com.tyy.dto.UserDTO;
 import com.tyy.entities.Employee;
-import com.tyy.entities.Schedule;
 import com.tyy.services.EmployeeService;
 import com.tyy.services.ScheduleService;
 import com.tyy.services.SystemUserDetailsService;
 
 @Controller
-public class EmployeeController{
+public class EmployeeController extends MainController{
 	
 	@Autowired 
 	SystemUserDetailsService userService;
@@ -31,6 +26,16 @@ public class EmployeeController{
 	EmployeeService employeeService;
 	@Autowired
 	ScheduleService scheduleService;
+	
+	@RequestMapping("/")
+	public String index() {
+		return "redirect:/system/main";
+	}
+	
+	@RequestMapping("/system/main")
+	public String system() {
+		return "/system/main";
+	}
 	
 	@GetMapping("/employee/profile")
 	public String eProfile(Model theModel) {
@@ -69,18 +74,6 @@ public class EmployeeController{
 	
 	@GetMapping("/employee/my_schedule")
 	public String viewMySchedule(Model theModel) {
-		int eid = employeeService.getCurrentEmployeeID();
-		List<Schedule> personalSchedules = scheduleService.findAllByEmployeeId(eid);
-		List<PersonalScheduleDTO> psdto = new ArrayList<PersonalScheduleDTO>(); 
-		System.out.println(psdto);
-		/*String[] day = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-		for(String d:day) {
-			psdto.add(new PersonalScheduleDTO(d));
-		}
-		for(Schedule ps:personalSchedules) {
-			
-		}*/
-		theModel.addAttribute("psdto",psdto);
 		return "/employee/my_schedule";
 	}
 }

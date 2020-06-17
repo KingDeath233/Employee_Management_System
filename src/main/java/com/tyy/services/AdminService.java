@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.tyy.dao.AdminDAO;
 
 @Service
-public class AdminService {
+public class AdminService extends MainService{
 	@Autowired
 	private AdminDAO repo;
 	

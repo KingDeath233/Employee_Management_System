@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Auth {
+public class Auth{
 	@Id
 	private String username;
 	

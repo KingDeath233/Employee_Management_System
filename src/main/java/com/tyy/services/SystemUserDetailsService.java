@@ -26,7 +26,7 @@ import com.tyy.entities.ManagerEmployeeRelation;
 import com.tyy.entities.User;
 
 @Service
-public class SystemUserDetailsService implements UserDetailsService {
+public class SystemUserDetailsService extends MainService implements UserDetailsService {
 
 	@Autowired
 	private UserDetailsManager jdbcUserDetailsManager;

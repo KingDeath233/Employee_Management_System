@@ -178,6 +178,10 @@ body{
   font-size: 1rem;
 }
 
+.side-navbar.shrink #side-tag-text{
+	font-size:5px;
+}
+
 .side-navbar.shrink .arrow {
   float: none;
   -webkit-transform: none !important;

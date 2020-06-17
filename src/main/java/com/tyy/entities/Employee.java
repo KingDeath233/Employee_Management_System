@@ -49,4 +49,18 @@ public class Employee {
 	
 	@Column(name="ismanager")
 	private int ismanager;
+	
+	public String search(){
+		String str = firstname+" "+lastname+" "+email+" "+phone+" "+username+" ";
+		if(ismanager==2) {
+			str+="admin";
+		}
+		else if(ismanager==1) {
+			str+="manager";
+		}
+		else {
+			str+="employee";
+		}
+		return str;
+	}
 }
