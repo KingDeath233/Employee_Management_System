@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+
+<!-- Reference Bootstrap files -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.error {
+	color: red;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<div>
+  <div id="signupbox" style="margin-top: 50px" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset02">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">User Sign Up</div>
+      </div>
+      <div style="padding-top: 10px" class="panel-body"> 
+        <!-- Signup Form -->
+        <form th:action="@{/process-register}" th:object="${newUser}" method="POST">
+          <div class="form-group">
+            <div th:if="${param.userExists}" class="alert alert-danger col-xs-offset-1 col-xs-10"> Username already exists! </div>
+            <div th:if="${param.codeNotExists}" class="alert alert-danger col-xs-offset-1 col-xs-10"> Code is not valid! </div>
+          </div>
+          <div style="margin-bottom:10px;">
+            <input class="form-control" type="text" th:field="*{username}" placeholder="User Name">
+          </div>
+          <div class="error" th:if="*{#fields.hasErrors('username')}" th:errors="*{username}"></div>
+          <div style="margin-bottom:10px;">
+            <input class="form-control" type="password" th:field="*{password}" placeholder="Password">
+          </div>
+          <div class="error" th:if="*{#fields.hasErrors('password')}" th:errors="*{password}"></div>
+          <div style="margin-bottom:10px;">
+            <input class="form-control" type="password" th:field="*{matchingPassword}" placeholder="Type Password Again">
+          </div>
+          <div class="error" th:if="*{#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></div>
+          <div style="margin-bottom:10px;">
+            <input class="form-control" type="text" th:field="*{code}" placeholder="Code">
+          </div>
+          <div class="error" th:if="*{#fields.hasErrors('code')}" th:errors="*{code}"></div>
+          <div class="error" th:if="*{#fields.hasErrors('global')}" th:errors="*{global}"></div>
+          <button style="width:80px;" type="submit" class="btn btn-success">Submit</button>
+          <button style="margin-left: 15px;width:80px;" type="reset" class="btn btn-secondary">Reset</button>
+          <button style="margin-left: 15px;width:80px;" type="button" class="btn btn-secondary"
+                        th:onclick="window.location.href='/login'">Return</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
