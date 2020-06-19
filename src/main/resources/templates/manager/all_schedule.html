@@ -42,29 +42,7 @@
 	<div class="content">
 		<div th:replace="/fragements/header_template :: header"></div>
 		<div class="page">
-			<form METHOD="POST" th:action="@{/manager/process-code}"
-				th:object="${code}">
-				<div>
-					<select class="custom-select" th:field="*{type}"
-						style="width: 500px; margin-bottom: 30px;">
-						<option th:if="${#authentication.name}=='admin'"
-							style="min-width: 500px;" th:text="Manager" th:value="manager"></option>
-						<option style="min-width: 500px;" th:text="Employee"
-							th:value="employee"></option>
-					</select>
-				</div>
-				<div>
-					<select th:field="*{number}" class="custom-select"
-						style="width: 500px; margin-bottom: 30px;">
-						<option style="min-width: 500px;" th:text="1" th:value=1></option>
-						<option style="min-width: 500px;" th:text="5" th:value=5></option>
-						<option style="min-width: 500px;" th:text="10" th:value=10></option>
-						<option style="min-width: 500px;" th:text="20" th:value=20></option>
-						<option style="min-width: 500px;" th:text="50" th:value=50></option>
-					</select>
-				</div>
-				<button class="btn btn-info col-2" type="submit">Generate</button>
-			</form>
+			<p>This page is still in progress!</p>
 		</div>
 		<div th:replace="/fragements/footer_template :: footer"></div>
 	</div>

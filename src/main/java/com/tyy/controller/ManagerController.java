@@ -31,7 +31,6 @@ public class ManagerController extends MainController{
 		 theModel.addAttribute("employeePage",employeePage);
 		 theModel = setPageAndKey(theModel,employeePage.getTotalPages(),page,key);
 		return "/manager/show_employee_list";
-		
 	}
 	
 	@GetMapping("/manager/generate_code")
@@ -51,5 +50,10 @@ public class ManagerController extends MainController{
 			serialService.save(scode);
 		}
 		return "redirect:/";
+	}
+	
+	@GetMapping("/manager/all_schedule")
+	public String allSchedule() {
+		return "/manager/all_schedule";
 	}
 }

@@ -17,4 +17,8 @@ public class ManagerEmployeeRelationDTO {
 	private String employee_last_name;
 	private String employee_first_name;
 
+	public String search(){
+		String str = manager_last_name+" "+manager_first_name+" "+employee_last_name+" "+employee_first_name;
+		return str;
+	}
 }

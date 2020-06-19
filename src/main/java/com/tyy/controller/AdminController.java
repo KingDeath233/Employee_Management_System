@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tyy.dto.ManagerEmployeeRelationDTO;
 import com.tyy.dto.UserDTOforAdmin;
 import com.tyy.entities.Employee;
 import com.tyy.entities.ManagerEmployeeRelation;
@@ -34,8 +37,11 @@ public class AdminController extends MainController{
 	SystemUserDetailsService userService;
 	
 	@GetMapping("/admin/show_relation")
-	public String showRelation(Model theModel) {
-		theModel.addAttribute("relations",MERService.findAllFromManagerEmployeeRelation());
+	public String showRelation(Model theModel,@RequestParam(value = "page",defaultValue = "1")int page, @RequestParam(value = "size",defaultValue = "5")int size,
+			@RequestParam(value = "key",defaultValue = "")String key) {
+		Page<ManagerEmployeeRelationDTO> MERPage = MERService.findAllFromManagerEmployeeRelation(PageRequest.of(page-1, size),key);
+		theModel.addAttribute("MERPage",MERPage);
+		theModel = setPageAndKey(theModel,MERPage.getTotalPages(),page,key);
 		return "/admin/show_relation";
 	}
 	
@@ -115,19 +121,21 @@ public class AdminController extends MainController{
     }
 	
 	@GetMapping("/admin/show_users")
-	public String showUsers(Model theModel) {
-		List<UserDTOforAdmin> tmp = userService.findAllUserWithAuth();
-		theModel.addAttribute("users",tmp);
+	public String showUsers(Model theModel,@RequestParam(value = "page",defaultValue = "1")int page, @RequestParam(value = "size",defaultValue = "5")int size
+			,@RequestParam(value = "key",defaultValue = "")String key) {
+		Page<UserDTOforAdmin> userPage = userService.findAllUserWithAuth(PageRequest.of(page-1, size),key);
+		theModel.addAttribute("userPage",userPage);
+		theModel = setPageAndKey(theModel,userPage.getTotalPages(),page,key);
 		return "/admin/show_users";
 	}
 	
-	@PostMapping("/admin/process-enable")
+	@GetMapping("/admin/process-enable")
 	public String processEnable(@RequestParam("username") String username) {
 		userService.changeEnable(username);
 		return "redirect:/admin/show_users";
 	}
 	
-	@PostMapping("/admin/process-position")
+	@GetMapping("/admin/process-position")
 	public String processPosition(@RequestParam("username") String username) {
 		userService.changePosition(username);
 		return "redirect:/admin/show_users";

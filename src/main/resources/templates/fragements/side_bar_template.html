@@ -1,53 +1,50 @@
 <div th:fragment="side_bar">
-    <nav class="side-navbar">
-        <div class="side-navbar-wrapper">
-            <!-- Sidebar Wrapper -->
-            <div class="sidenav-header d-flex align-items-center justify-content-center mb-4">
-                <!-- User Info, containing user profile image(click to go to profile) -->
-                <div class="sidenav-header-inner text-center">
-                    <a th:href="@{/employee/profile}"><img th:src="@{/img/user_image.jpg}" class="rounded-circle"></a>
+	<nav class="side-navbar">
+		<div class="side-navbar-wrapper">
+			<!-- Sidebar Wrapper -->
+			<div
+				class="sidenav-header d-flex align-items-center justify-content-center mb-4">
+				<!-- User Info, containing user profile image(click to go to profile) -->
+				<div class="sidenav-header-inner text-center">
+					<a th:href="@{/employee/profile}"><img
+						th:src="@{/img/user_image.jpg}" class="rounded-circle"></a>
 
-                    <!-- User name from database -->
-                    <h3 sec:authentication="name"></h3><span sec:authentication="principal.authorities"></span>
-                </div>
-                <div class="sidenav-header-logo"><a href="" class="brand-small text-center"></a></div>
-            </div>
-            <div class="sidenav-menu">
-                <strong id="side-tag-text" class="sidenav-menu-heading mb-5 pb-5">Current Page</strong>
-                <!-- List of functions -->
-                <ul id="side-main-menu" class="side-menu list-unstyled">
-                    <li>
-                        <a href="/"><i class="fa fa-home"></i>Home</a>
-                    </li>
-                    <li>
-                        <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/show_users}"><i
-                                class="fa fa-home"></i>Manage Account</a>
-                    </li>
-                    <li>
-                        <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin/show_relation}"><i
-                                class="fa fa-home"></i>Manage Relation</a>
-                    </li>
-                    <li>
-                        <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" th:href="@{/manager/generate_code}"><i
-                                class="fa fa-home"></i>Generate Code</a>
-                    </li>
-                    <li>
-                        <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" th:href="@{/manager/show_employee_list}"><i
-                                class="fa fa-home"></i>View All Employee</a>
-                    </li>
-                    <li>
-                        <a href="#scheduleDropdown" data-toggle="collapse"><i class="fa fa-calendar"></i>Schedule</a>
-                        <ul id="scheduleDropdown" class="collapse list-unstyled">
-                            <li><a href="/employee/my_schedule">My Schedule</a></li>
-                            <li><a href="#">All Employee Schedule</a></li>
-                        </ul>
-                    </li>
-					<li>
-                        <a th:href="@{/employee/change_password}"><i
-                                class="fa fa-home"></i>Change Password</a>
-					</li>
-                </ul>
-            </div>
-        </div>
+					<!-- User name from database -->
+					<h3 sec:authentication="name"></h3>
+					<span sec:authentication="principal.authorities"></span>
+				</div>
+				<div class="sidenav-header-logo">
+					<a href="" class="brand-small text-center"></a>
+				</div>
+			</div>
+			<div class="sidenav-menu">
+				<strong id="side-tag-text" class="sidenav-menu-heading mb-5 pb-5">Current
+					Page</strong>
+				<!-- List of functions -->
+				<ul id="side-main-menu" class="side-menu list-unstyled">
+					<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+					<li><a sec:authorize="hasAnyRole('ADMIN')"
+						th:href="@{/admin/show_users}"><i class="fa fa-home"></i>Manage
+							Account</a></li>
+					<li><a sec:authorize="hasAnyRole('ADMIN')"
+						th:href="@{/admin/show_relation}"><i class="fa fa-home"></i>Manage
+							Relation</a></li>
+					<li><a sec:authorize="hasAnyRole('ADMIN','MANAGER')"
+						th:href="@{/manager/generate_code}"><i class="fa fa-home"></i>Generate
+							Code</a></li>
+					<li><a sec:authorize="hasAnyRole('ADMIN','MANAGER')"
+						th:href="@{/manager/show_employee_list}"><i class="fa fa-home"></i>View
+							All Employee</a></li>
+					<li><a href="#scheduleDropdown" data-toggle="collapse"><i
+							class="fa fa-calendar"></i>Schedule</a>
+						<ul id="scheduleDropdown" class="collapse list-unstyled">
+							<li><a href="/employee/my_schedule">My Schedule</a></li>
+							<li><a href="/manager/all_schedule">All Employee Schedule</a></li>
+						</ul></li>
+					<li><a th:href="@{/employee/change_password}"><i
+							class="fa fa-home"></i>Change Password</a></li>
+				</ul>
+			</div>
+		</div>
 	</nav>
 </div>

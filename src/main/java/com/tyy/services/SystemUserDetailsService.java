@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -79,8 +83,22 @@ public class SystemUserDetailsService extends MainService implements UserDetails
 		return username;
 	}
 	
-	public List<UserDTOforAdmin> findAllUserWithAuth(){
-		return urepo.findAllUserWithAuth();
+	public Page<UserDTOforAdmin> findAllUserWithAuth(Pageable pageable, String key){
+		List<UserDTOforAdmin> users = urepo.findAllUserWithAuth();
+		List<UserDTOforAdmin> key_search = new ArrayList<UserDTOforAdmin>();
+		if(key.equals("")) {
+			key_search = users;
+		}
+		else {
+			for(UserDTOforAdmin e:users) {
+				if(e.search().toLowerCase().contains(key.toLowerCase())) {
+					key_search.add(e);
+				}
+			}
+		}
+		List<UserDTOforAdmin> list = searchUsingKey(key_search, pageable);
+		Page<UserDTOforAdmin> userPage = new PageImpl<UserDTOforAdmin>(list, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()),key_search.size());
+		return userPage;
 	}
 	
 	public UserDTOforAdmin findUserWithAuth(String username){

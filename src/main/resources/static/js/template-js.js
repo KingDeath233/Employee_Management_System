@@ -71,6 +71,10 @@ $(document).ready(function () {
     	}
     }
     
+    function test(){
+    	$('#year').text(new Date().getFullYear());
+    }
+    
     document.onkeydown=function(event){
         var e = event || window.event || arguments.callee.caller.arguments[0];
         if(e && e.keyCode==13){
@@ -78,7 +82,6 @@ $(document).ready(function () {
         }
     };
 
-    window.onload=entryNumberInitial;
-    window.onload=searchKeyInitial;
+    window.onload =function() { entryNumberInitial();  searchKeyInitial(); test();}
     
 });
