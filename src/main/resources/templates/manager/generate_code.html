@@ -38,9 +38,9 @@
 </head>
 
 <body>
-	<div th:replace="/fragements/side_bar_template :: side_bar"></div>
+	<div th:replace="fragements/side_bar_template :: side_bar"></div>
 	<div class="content">
-		<div th:replace="/fragements/header_template :: header"></div>
+		<div th:replace="fragements/header_template :: header"></div>
 		<div class="page">
 			<form METHOD="POST" th:action="@{/manager/process-code}"
 				th:object="${code}">
@@ -66,7 +66,7 @@
 				<button class="btn btn-info col-2" type="submit">Generate</button>
 			</form>
 		</div>
-		<div th:replace="/fragements/footer_template :: footer"></div>
+		<div th:replace="fragements/footer_template :: footer"></div>
 	</div>
 </body>
 </html>

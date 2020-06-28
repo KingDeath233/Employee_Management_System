@@ -24,23 +24,23 @@ public class ManagerController extends MainController{
 	@Autowired
 	SerialCodeService serialService;
 	
-	@GetMapping("/manager/show_employee_list")
+	@GetMapping("manager/show_employee_list")
 	public String showEmployeeList(Model theModel, @RequestParam(value = "page",defaultValue = "1")int page, @RequestParam(value = "size",defaultValue = "5")int size
 			,@RequestParam(value = "key",defaultValue = "")String key){
 		 Page<Employee> employeePage = employeeService.findAllEmployeeAndManagerPage(PageRequest.of(page-1, size),key);
 		 theModel.addAttribute("employeePage",employeePage);
 		 theModel = setPageAndKey(theModel,employeePage.getTotalPages(),page,key);
-		return "/manager/show_employee_list";
+		return "manager/show_employee_list";
 	}
 	
-	@GetMapping("/manager/generate_code")
+	@GetMapping("manager/generate_code")
 	public String generateCode(Model theModel) {
 		SerialCode code = new SerialCode();
 		theModel.addAttribute("code",code);
-		return "/manager/generate_code";
+		return "manager/generate_code";
 	}
 	
-	@PostMapping("/manager/process-code")
+	@PostMapping("manager/process-code")
 	public String processCode(@ModelAttribute("code") SerialCode c) {
 		for(int i = 0;i<c.getNumber();i++) {
 			SerialCode scode = new SerialCode();
@@ -49,11 +49,11 @@ public class ManagerController extends MainController{
 			scode.setCode(s);
 			serialService.save(scode);
 		}
-		return "redirect:/";
+		return "redirect:/system/main";
 	}
 	
-	@GetMapping("/manager/all_schedule")
+	@GetMapping("manager/all_schedule")
 	public String allSchedule() {
-		return "/manager/all_schedule";
+		return "manager/all_schedule";
 	}
 }

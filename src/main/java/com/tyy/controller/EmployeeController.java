@@ -27,28 +27,28 @@ public class EmployeeController extends MainController{
 	@Autowired
 	ScheduleService scheduleService;
 	
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String index() {
 		return "redirect:/system/main";
 	}
 	
-	@RequestMapping("/system/main")
+	@RequestMapping("system/main")
 	public String system() {
-		return "/system/main";
+		return "system/main";
 	}
 	
-	@GetMapping("/employee/profile")
+	@GetMapping("employee/profile")
 	public String eProfile(Model theModel) {
 		String username = userService.getUsername();
 		Employee e = employeeService.findByUsername(username);
 		theModel.addAttribute("employee",e);
-		return "/employee/profile";
+		return "employee/profile";
 	}
 	
-	@PostMapping("/employee/profile/save")
+	@PostMapping("employee/profile/save")
 	public String saveProfile(@Valid @ModelAttribute("employee") Employee employee,BindingResult result,Model theModel) {
 		if(result.hasErrors()){
-			return "/employee/profile";
+			return "employee/profile";
 		}
 		else {
 			employeeService.save(employee);
@@ -56,24 +56,24 @@ public class EmployeeController extends MainController{
 		}
 	}
 	
-	@GetMapping("/employee/change_password")
+	@GetMapping("employee/change_password")
 	public String changePassword(Model theModel) {
 		PasswordDTO pdto = new PasswordDTO();
 		theModel.addAttribute("psdto", pdto);
-		return "/employee/change_password";
+		return "employee/change_password";
 	}
 	
 	@PostMapping("employee/process-password")
 	public String processPassword(@Valid @ModelAttribute("psdto") PasswordDTO psdto,BindingResult result, Model theModel) {
 		if(result.hasErrors()){
-			return "/employee/change_password";
+			return "employee/change_password";
 		}
 		userService.changePassword(psdto.getNewpass());
 		return "redirect:/";
 	}
 	
-	@GetMapping("/employee/my_schedule")
+	@GetMapping("employee/my_schedule")
 	public String viewMySchedule(Model theModel) {
-		return "/employee/my_schedule";
+		return "employee/my_schedule";
 	}
 }

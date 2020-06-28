@@ -29,7 +29,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-
+	
 <!-- Template js -->
 <script th:src="@{/js/template-js.js}"></script>
 
@@ -38,13 +38,14 @@
 </head>
 
 <body>
-	<div th:replace="/fragements/side_bar_template :: side_bar"></div>
+	<div th:replace="fragements/side_bar_template :: side_bar"></div>
 	<div class="content">
-		<div th:replace="/fragements/header_template :: header"></div>
+		<div th:replace="fragements/header_template :: header"></div>
 		<div class="page">
 			<h2 class="font-weight-bold text-center" style="padding-top:200px;">Welcome to Employee Manager System Produce by TYY</h2>
 		</div>
-		<div th:replace="/fragements/footer_template :: footer"></div>
+		<div th:replace="fragements/footer_template :: footer"></div>
 	</div>
 </body>
+
 </html>

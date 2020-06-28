@@ -38,8 +38,8 @@
 <body>
 
 	<div class="content">
-		<div th:replace="/fragements/side_bar_template :: side_bar"></div>
-		<div th:replace="/fragements/header_template :: header"></div>
+		<div th:replace="fragements/side_bar_template :: side_bar"></div>
+		<div th:replace="fragements/header_template :: header"></div>
 
 		<div class="page">
 
@@ -111,12 +111,14 @@
 								th:if="${key}!=''"> <a class="btn btn-light"
 									th:href="@{/manager/show_employee_list (page=${pageNumber}, size=${employeePage.size},key=${key})}"
 									th:text="${pageNumber}"
-									th:if="${pageNumber}==1 or ${pageNumber==employeePage.totalPages} or (${pageNumber}<=${currentpage}+2 and ${currentpage-2}<=${pageNumber})">
+									th:if="${pageNumber}==1 or ${pageNumber==employeePage.totalPages} or (${pageNumber}<=${currentpage}+2 and ${currentpage-2}<=${pageNumber})"
+									th:classappend="${currentpage}==${pageNumber}?'active':''">
 								</a>
 							</span> <span th:if="${key}==''"> <a class="btn btn-light"
 									th:href="@{/manager/show_employee_list (page=${pageNumber}, size=${employeePage.size})}"
 									th:text="${pageNumber}"
-									th:if="${pageNumber}==1 or ${pageNumber==employeePage.totalPages} or (${pageNumber}<=${currentpage}+2 and ${currentpage-2}<=${pageNumber})">
+									th:if="${pageNumber}==1 or ${pageNumber==employeePage.totalPages} or (${pageNumber}<=${currentpage}+2 and ${currentpage-2}<=${pageNumber})"
+									th:classappend="${currentpage}==${pageNumber}?'active':''">
 								</a>
 							</span> <span
 								th:if="${pageNumber!=1} and ${pageNumber!=employeePage.totalPages} and (${pageNumber}==${currentpage}+3 or ${currentpage-3}==${pageNumber})">...</span>
@@ -126,7 +128,7 @@
 				</div>
 			</div>
 		</div>
-		<div th:replace="/fragements/footer_template :: footer"></div>
+		<div th:replace="fragements/footer_template :: footer"></div>
 	</div>
 
 </body>

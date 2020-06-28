@@ -52,26 +52,28 @@ $(document).ready(function () {
     
     function entryNumberInitial(){
     	var s = getQueryVariable("size");
-    	if(s==5 || s==false){
-    		document.getElementById("select_entries").options[0].selected=true;
-    	}
-    	else if(s==10){
-    		document.getElementById("select_entries").options[1].selected=true;
-    	}
-    	else if(s==20){
-    		document.getElementById("select_entries").options[2].selected=true;
+    	if(document.getElementById("select_entries")!=null){
+        	if(s==5 || s==false){
+        		document.getElementById("select_entries").options[0].selected=true;
+        	}
+        	else if(s==10){
+        		document.getElementById("select_entries").options[1].selected=true;
+        	}
+        	else if(s==20){
+        		document.getElementById("select_entries").options[2].selected=true;
+        	}
     	}
     }
     
     function searchKeyInitial(){
     	var key = getQueryVariable("key");
     	var s = document.getElementById("search-field");
-    	if(s!=""){
+    	if(s!="" && s!=null){
         	s.value = key;
     	}
     }
     
-    function test(){
+    function getYear(){
     	$('#year').text(new Date().getFullYear());
     }
     
@@ -82,6 +84,12 @@ $(document).ready(function () {
         }
     };
 
-    window.onload =function() { entryNumberInitial();  searchKeyInitial(); test();}
+    function initial(){
+    	entryNumberInitial();
+    	searchKeyInitial();
+    	getYear();
+    }
+    
+    window.onload = initial();
     
 });

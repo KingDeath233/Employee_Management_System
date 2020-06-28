@@ -31,19 +31,19 @@ public class UserController extends MainController{
 	
 	@RequestMapping("/login")
 	public String login() {
-		return "/login";
+		return "login";
 	}
 	
 	@GetMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("newUser", new UserDTO());
-		return "/register";
+		return "register";
 	}
 	
 	@PostMapping("/process-register")
 	public String registerUser(@Valid @ModelAttribute("newUser") UserDTO newUser, BindingResult result, Model model) {
 		if(result.hasErrors()){
-			return "/register";
+			return "register";
 		}
 		String type = serialCodeService.ifCodeExist(newUser.getCode());
 		if(type.equals("")) {
