@@ -178,8 +178,9 @@ body{
   font-size: 1rem;
 }
 
-.side-navbar.shrink #side-tag-text{
-	font-size:5px;
+.side-navbar.shrink #side-tag-text, .side-navbar.show-sm #side-tag-text{
+	margin-left:0;
+	font-size:7px;
 }
 
 .side-navbar.shrink .arrow {
@@ -200,9 +201,9 @@ body{
   display: none;
 }
 
-.side-navbar.shrink .sidenav-heading {
+.side-navbar.shrink .sidenav-menu-heading {
   margin-left: 0;
-  font-size: .8rem;
+  font-size: 1rem;
 }
 
 .side-navbar.shrink ul li a {
