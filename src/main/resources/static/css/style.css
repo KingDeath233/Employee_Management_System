@@ -456,7 +456,7 @@ body{
     display: block;
   }
 
-  .side-narbar .sidenav-header-inner{
+  .side-navbar.show-sm .sidenav-header-inner h3, .side-navbar.show-sm .sidenav-header-inner span{
     display:none;
   }
 
