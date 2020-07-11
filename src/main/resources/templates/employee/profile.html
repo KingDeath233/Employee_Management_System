@@ -40,7 +40,7 @@
 	<div th:replace="fragements/side_bar_template :: side_bar"></div>
 	<div class="content">
 		<div th:replace="fragements/header_template :: header"></div>
-		<div id="page">
+		<div class="page">
 			<form th:action="@{/employee/profile/save}" th:object="${employee}"
 				method="POST">
 				<input type="hidden" th:field="*{id}"> <input type="hidden"

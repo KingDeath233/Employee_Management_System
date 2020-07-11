@@ -90,15 +90,15 @@
 												th:href="@{/admin/process-enable(username=${temp.username})}">Enable</a>
 											<a sec:authorize="hasAnyRole('ADMIN')"
 												th:href="@{/admin/reset-password(username = ${temp.username})}"
-												class="btn btn-info pt-1 pb-1">Reset Password</a>
+												class="btn btn-info mt-1 mb-1">Reset Password</a>
 									</td>
 										
 									<td th:if="${temp.auth=='ROLE_ADMIN'}"></td>
 									<td th:if="!${temp.auth=='ROLE_ADMIN'}">
 											<a th:if="${temp.auth}!='ROLE_MANAGER'" th:href="@{/admin/process-position(username=${temp.username})}"
-												class="btn btn-info pt-1 pb-1">Promotion</a>
+												class="btn btn-info mt-1 mb-1">Promotion</a>
 											<a th:if="${temp.auth}=='ROLE_MANAGER'" th:href="@{/admin/process-position(username=${temp.username})}"
-												class="btn btn-info pt-1 pb-1">Demotion</a>
+												class="btn btn-info mt-1 mb-1">Demotion</a>
 									</td>
 								</tr>
 							</tbody>
